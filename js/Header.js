@@ -56,7 +56,7 @@ let html = `
   </div>
 </div>
 
-  <a href="#" class="a-img-logo "><img src="images/logo.svg"/></a>
+  <a href="#" class="a-img-logo "><img src="../../logo.svg"/></a>
   </nav>
   `;
 
@@ -65,15 +65,6 @@ html = html.trim();
 template.innerHTML = html;
 
 const headerNode = template.content.firstChild;
-
-// class Header extends HTMLElement {
-//   constructor() {
-//     super();
-//     this.attachShadow({ mode: "open" });
-//     // this.shadowRoot.appendChild(template.content.cloneNode(true));
-//   }
-
-// }
 
 class Header {
   static render(query) {
