@@ -56,7 +56,7 @@ let html = `
   </div>
 </div>
 
-  <a href="#" class="a-img-logo "><img src="../../logo.svg"/></a>
+  <a href="#" class="a-img-logo "><img src="https://raw.githubusercontent.com/Lubava7/dmitry-zakaz/8b81e1ef6ee2abc968bd2ff0c0fc47ab600e4198/logo.svg"/></a>
   </nav>
   `;
 
