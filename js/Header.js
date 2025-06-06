@@ -1,59 +1,17 @@
-const template = document.createElement("template");
+const template = document.createElement('template');
 let html = `
 <nav class="header">
-<div class="dropdown">
-  <a href="testPage.html" class="a">portfolio</a>
-  <div class="dropdown-menu">
-    <a href="#">b&w</a>
-    <a href="#">portraits</a>
-    <a href="#" class="menu-line"></a>
-  </div>
-</div>
-
-  <div class="dropdown">
-    <a href="#" class="a">film</a>
-    <div class="dropdown-menu">
-      <a href="#">b&w</a>
-      <a href="#">portraits</a>
-      <a href="#" class="menu-line"></a>
-    </div>
-  </div>
 
 <div class="dropdown">
-  <a href="#" class="a">digital</a>
-  <div class="dropdown-menu">
-    <a href="pages/blackWhite/blackWhite.html">b&w</a>
-    <a href="../pages/color/color.html">color</a>
-    <a href="../pages/portraits/portraits.html">portraits</a>
-    <a href="#" class="menu-line"></a>
-  </div>
+  <a href="#" class="a">film</a>
 </div>
-
-  <div class="dropdown">
-    <a href="#" class="a">food</a>
-    <div class="dropdown-menu">
-      <a href="#">b&w</a>
-    <a href="#">portraits</a>
-    <a href="#" class="menu-line"></a>
-    </div>
-  </div>
 
 <div class="dropdown">
   <a href="#" class="a">videos</a>
-  <div class="dropdown-menu">
-    <a href="#">b&w</a>
-    <a href="#">portraits</a>
-    <a href="#"class="menu-line"></a>
-  </div>
 </div>
 
 <div class="dropdown">
   <a href="#" class="a">about me</a>
-  <div class="dropdown-menu">
-    <a href="#">b&w</a>
-    <a href="#">portraits</a>
-    <a  href="#"class="menu-line"></a>
-  </div>
 </div>
 
   <a href="#" class="a-img-logo "><img src="https://raw.githubusercontent.com/Lubava7/dmitry-zakaz/8b81e1ef6ee2abc968bd2ff0c0fc47ab600e4198/logo.svg"/></a>
@@ -73,4 +31,4 @@ class Header {
     document.body.insertBefore(headerNode, node);
   }
 }
-window.customElements.define("header-comp", Header);
+window.customElements.define('header-comp', Header);
