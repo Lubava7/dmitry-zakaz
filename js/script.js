@@ -1,4 +1,4 @@
-console.log('commit version 12');
+console.log('commit version 15');
 // HEADER
 Header.render('.insert-header');
 
@@ -21,21 +21,21 @@ if (buttonLeft || buttonRight) {
 
 // PHOTO CAROUSEL
 const photos = [
-  '../images/example1.jpg',
-  '../images/example2.jpg',
-  '../images/example3.jpg',
-  '../images/flowers.jpg',
-  '../images/woman.jpg',
-  '../images/example1.jpg',
-  '../images/example2.jpg',
-  '../images/example3.jpg',
-  '../images/flowers.jpg',
-  '../images/woman.jpg',
-  '../images/example1.jpg',
-  '../images/example2.jpg',
-  '../images/example3.jpg',
-  '../images/flowers.jpg',
-  '../images/woman.jpg',
+  'images/example1.jpg',
+  'images/example2.jpg',
+  'images/example3.jpg',
+  'images/flowers.jpg',
+  'images/woman.jpg',
+  'images/example1.jpg',
+  'images/example2.jpg',
+  'images/example3.jpg',
+  'images/flowers.jpg',
+  'images/woman.jpg',
+  'images/example1.jpg',
+  'images/example2.jpg',
+  'images/example3.jpg',
+  'images/flowers.jpg',
+  'images/woman.jpg',
 ];
 
 let currentPhotoIndex = 0;

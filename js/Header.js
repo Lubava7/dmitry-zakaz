@@ -1,9 +1,8 @@
 const template = document.createElement('template');
 let html = `
 <nav class="header">
-
 <div class="dropdown">
-  <a href="./film.html" class="a">film</a>
+  <a href="./films.html" class="a">film</a>
 </div>
 
 <div class="dropdown">
@@ -11,10 +10,9 @@ let html = `
 </div>
 
 <div class="dropdown">
-  <a href="./about.html" class="a">about me</a>
+  <a href="./about.html" class="a">about</a>
 </div>
-
-  </nav>
+</nav>
   `;
 
 html = html.trim();
