@@ -46,9 +46,6 @@ function initializeCarousel() {
   const mainPhotosContainer = document.getElementById('main-photos-container');
   const thumbnailsContainer = document.getElementById('thumbnails');
 
-  mainPhotosContainer.innerHTML = '';
-  thumbnailsContainer.innerHTML = '';
-
   photos.forEach((photo, index) => {
     const mainPhotoItem = document.createElement('div');
     mainPhotoItem.className = 'main-photo-item';
