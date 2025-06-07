@@ -3,15 +3,15 @@ let html = `
 <nav class="header">
 
 <div class="dropdown">
-  <a href="/film.html" class="a">film</a>
+  <a href="./film.html" class="a">film</a>
 </div>
 
 <div class="dropdown">
-  <a href="/video.html" class="a">videos</a>
+  <a href="./video.html" class="a">videos</a>
 </div>
 
 <div class="dropdown">
-  <a href="/about.html" class="a">about me</a>
+  <a href="./about.html" class="a">about me</a>
 </div>
 
   </nav>
