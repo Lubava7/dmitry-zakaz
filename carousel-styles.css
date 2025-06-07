@@ -1,0 +1,122 @@
+.carousel-container {
+  max-width: 800px;
+  margin: 50px auto;
+  position: relative;
+}
+
+.main-photo {
+  width: 100%;
+  height: 500px;
+  background-color: #333;
+  position: relative;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+#main-photos-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carusel-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1450px;
+}
+
+.main-photo-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.main-photo-item.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.arrow {
+  transform: translateY(-50%);
+  background: transparent;
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-size: 50px;
+  z-index: 10;
+  margin: 0 5%;
+}
+
+.thumbnails-container {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 5px;
+  transition: transform 0.3s ease;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #666;
+
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  color: white;
+
+  flex-shrink: 0;
+  margin: 0 5px;
+  transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+}
+
+.thumbnail:hover {
+  border-color: #fff;
+}
+
+.thumbnail.active {
+  border-color: #007bff;
+}
+
+/* Loading state */
+.loading {
+  background-color: #555;
+  position: relative;
+}
+
+.loading::after {
+  content: 'Loading...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  z-index: 5;
+}

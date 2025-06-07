@@ -4,9 +4,53 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/archivo/v18/k3kCo_SYI-uM91cQDelH8UkWrw.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVc.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="carousel-styles.css" />
     <title>film</title>
   </head>
   <body>
-    dewdew
+    <a id="heading" href="/">Dmitry Zimnickiy</a>
+    <!-- здесь header -->
+    <div class="insert-header"></div>
+
+    <div class="carusel-wrapper">
+      <button class="arrow prev" onclick="changePhoto(-1)">‹</button>
+      <div class="carousel-container">
+        <!-- большое фото -->
+        <div class="main-photo">
+          <!-- фотографии -->
+          <div id="main-photos-container"></div>
+        </div>
+
+        <div class="thumbnails-container">
+          <div class="thumbnails" id="thumbnails"></div>
+        </div>
+      </div>
+
+      <button class="arrow next" onclick="changePhoto(1)">›</button>
+    </div>
+
+    <script src="js/Header.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/archivo/v18/k3kCo_SYI-uM91cQDelH8UkWrw.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVc.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>films</title>
+  </head>
+  <body>
+    <a id="heading" href="/">Dmitry Zimnickiy</a>
+    <!-- здесь header -->
+    <div class="insert-header"></div>
+
+    films
+
+    <div class="container">
+      <h1 class="films-title">Films</h1>
+
+      <div id="stats-overview" class="stats-overview" style="display: none">
+        <div id="stats-content"></div>
+      </div>
+
+      <div id="video-container" class="loading">
+        <div class="spinner"></div>
+        <div>Loading your films...</div>
+      </div>
+    </div>
+
+    <!-- Modal for video playback -->
+    <div id="video-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-title"></div>
+          <button class="close-button" id="close-modal">&times;</button>
+        </div>
+        <iframe id="video-player" class="video-embed" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <script src="js/Header.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
