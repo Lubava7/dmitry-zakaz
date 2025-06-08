@@ -1,4 +1,4 @@
-console.log('commit version 18');
+console.log('commit version 20 - added YT and vimeo support');
 // HEADER
 Header.render('.insert-header');
 
@@ -49,7 +49,7 @@ function initializeCarousel() {
 
     const img = new Image();
     img.src = photo;
-    mainPhotosContainer.appendChild(mainPhotoItem);
+    mainPhotosContainer?.appendChild(mainPhotoItem);
   });
 
   if (
@@ -66,7 +66,7 @@ function initializeCarousel() {
 
       const thumbImg = new Image();
       thumbImg.src = photo;
-      thumbnailsContainer.appendChild(thumbnail);
+      thumbnailsContainer?.appendChild(thumbnail);
     });
   }
 }
@@ -167,3 +167,48 @@ function removePhoto(index) {
     showPhoto(currentPhotoIndex);
   }
 }
+
+// PHOTOS + ONE PHOTO
+const films = [];
+
+class FilmCard {
+  constructor(url, short_name, short_description, name, description) {
+    this.el = document.createElement('div'); //контейнер для данных карточки - корневой дом элемент
+    this.el.setAttribute('id', 'film'); //присваиваем id контейнеру
+
+    this.el.onClick = this.navToSinglePage.bind(this);
+
+    this.url = `../images/${url}`;
+    this.short_name = short_name;
+    this.short_description = short_description;
+    this.name = name;
+    this.description = description;
+    this.el.innerHTML = `
+        <img src="${this.url}" />
+        <div class="film_layout">
+          <h1>${this.short_name}</h1>
+          <h1>&#8212;</h1>
+          <p>${this.short_description}</p>
+        </div>
+    `;
+
+    this.render();
+  }
+  navToSinglePage() {
+    // navigate to video.html page with specific id
+  }
+  render() {
+    document.getElementById('films_wrapper')?.appendChild(this.el); // вкладываем карточку в боди в нужный див
+    // console.log(this, 'данные фото карточки');
+  }
+}
+
+new FilmCard(
+  'example1.jpg',
+  'Saint Laurent',
+  'pre fall 2024',
+  ' name',
+  'description'
+);
+new FilmCard('example2.jpg', 'Vans', 'spring 2025', ' name', 'description');
+new FilmCard('woman.jpg', 'Rimova', 'fall 2024', ' name', 'description');

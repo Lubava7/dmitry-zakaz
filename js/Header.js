@@ -6,7 +6,7 @@ let html = `
 </div>
 
 <div class="dropdown">
-  <a href="./video.html" class="a">videos</a>
+  <a href="./videos.html" class="a">videos</a>
 </div>
 
 <div class="dropdown">
