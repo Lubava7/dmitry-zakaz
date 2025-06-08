@@ -1,4 +1,4 @@
-console.log('commit version 17');
+console.log('commit version 18');
 // HEADER
 Header.render('.insert-header');
 
@@ -31,11 +31,6 @@ const photos = [
   'images/example3.jpg',
   'images/flowers.jpg',
   'images/woman.jpg',
-  'images/example1.jpg',
-  'images/example2.jpg',
-  'images/example3.jpg',
-  'images/flowers.jpg',
-  'images/woman.jpg',
 ];
 
 let currentPhotoIndex = 0;
@@ -50,48 +45,30 @@ function initializeCarousel() {
     const mainPhotoItem = document.createElement('div');
     mainPhotoItem.className = 'main-photo-item';
     if (index === 0) mainPhotoItem.classList.add('active');
-
     mainPhotoItem.style.backgroundImage = `url('${photo}')`;
 
-    mainPhotoItem.classList.add('loading');
-
     const img = new Image();
-    img.onload = () => {
-      mainPhotoItem.classList.remove('loading');
-    };
-    img.onerror = () => {
-      mainPhotoItem.classList.remove('loading');
-      mainPhotoItem.style.backgroundImage = 'none';
-      mainPhotoItem.style.backgroundColor = '#555';
-      mainPhotoItem.textContent = `Image ${index + 1} failed to load`;
-    };
     img.src = photo;
-
     mainPhotosContainer.appendChild(mainPhotoItem);
-
-    const thumbnail = document.createElement('div');
-    thumbnail.className = 'thumbnail';
-    if (index === 0) thumbnail.classList.add('active');
-    thumbnail.style.backgroundImage = `url('${photo}')`;
-    thumbnail.textContent = index + 1;
-    thumbnail.onclick = () => goToPhoto(index);
-
-    thumbnail.classList.add('loading');
-    const thumbImg = new Image();
-    thumbImg.onload = () => {
-      thumbnail.classList.remove('loading');
-      thumbnail.textContent = '';
-    };
-    thumbImg.onerror = () => {
-      thumbnail.classList.remove('loading');
-      thumbnail.style.backgroundImage = 'none';
-      thumbnail.style.backgroundColor = '#666';
-      thumbnail.textContent = index + 1;
-    };
-    thumbImg.src = photo;
-
-    thumbnailsContainer.appendChild(thumbnail);
   });
+
+  if (
+    thumbnailsContainer &&
+    window.getComputedStyle(thumbnailsContainer.parentElement).display !==
+      'none'
+  ) {
+    photos.forEach((photo, index) => {
+      const thumbnail = document.createElement('div');
+      thumbnail.className = 'thumbnail';
+      if (index === 0) thumbnail.classList.add('active');
+      thumbnail.style.backgroundImage = `url('${photo}')`;
+      thumbnail.onclick = () => goToPhoto(index);
+
+      const thumbImg = new Image();
+      thumbImg.src = photo;
+      thumbnailsContainer.appendChild(thumbnail);
+    });
+  }
 }
 
 function showPhoto(index) {
@@ -102,21 +79,37 @@ function showPhoto(index) {
     mainPhotos[index].classList.add('active');
   }
 
-  const thumbnails = document.querySelectorAll('.thumbnail');
-  thumbnails.forEach((thumb) => thumb.classList.remove('active'));
+  const thumbnailsContainer = document.getElementById('thumbnails');
+  if (
+    thumbnailsContainer &&
+    window.getComputedStyle(thumbnailsContainer.parentElement).display !==
+      'none'
+  ) {
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach((thumb) => thumb.classList.remove('active'));
 
-  if (thumbnails[index]) {
-    thumbnails[index].classList.add('active');
+    if (thumbnails[index]) {
+      thumbnails[index].classList.add('active');
+    }
+
+    updateThumbnailsPosition(index);
   }
-
-  updateThumbnailsPosition(index);
 }
 
 function updateThumbnailsPosition(index) {
   const thumbnailsContainer = document.getElementById('thumbnails');
-  const thumbnailWidth = 90;
 
+  if (
+    !thumbnailsContainer ||
+    window.getComputedStyle(thumbnailsContainer.parentElement).display ===
+      'none'
+  ) {
+    return;
+  }
+
+  const thumbnailWidth = 90;
   let offset = 0;
+
   if (index >= Math.floor(visibleThumbnails / 2)) {
     offset = (index - Math.floor(visibleThumbnails / 2)) * thumbnailWidth;
 
