@@ -276,6 +276,7 @@ span {
 .content .photo {
   min-width: 300px;
   width: calc(48% - 5px);
+  transition: all 0.3s ease;
 }
 .content .photo img {
   width: 100%;
@@ -363,5 +364,11 @@ span {
 @media screen and (min-width: 1100px) {
   .content {
     gap: 35px;
+  }
+}
+
+@media screen and (min-width: 656px) {
+  .content .photo {
+    max-width: 150px;
   }
 }
