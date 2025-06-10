@@ -27,23 +27,6 @@ class VideoCard {
 
     this.el.innerHTML = this.generateIframe();
 
-    // this.el.innerHTML = `
-    //       <iframe
-    //       src="https://player.vimeo.com/video/${this.id}?h=${this.hash}&responsive=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&autopause=0"
-    //       frameborder="0"
-    //       allow="autoplay; fullscreen; picture-in-picture"
-    //       webkitAllowFullScreen
-    //       mozallowfullscreen
-    //       allowFullScreen
-    //     >
-    //     </iframe>
-    //     <div class="video_layout">
-    //       <h1>${this.short_name}</h1>
-    //       <h1>&#8212;</h1>
-    //       <p>${this.short_description}</p>
-    //     </div>
-    // `;
-
     this.render();
   }
   generateIframe() {
@@ -63,7 +46,7 @@ class VideoCard {
        
       >
       </iframe>
-      <div class="video_layout">
+      <div class="layout">
         <h1>${this.short_name}</h1>
         <h1>&#8212;</h1>
         <p>${this.short_description}</p>
@@ -72,15 +55,9 @@ class VideoCard {
   }
 
   navToSinglePage() {
-    // const params = new URLSearchParams({
-    //   id: this.id,
-    // });
-
-    // window.location.href = `video.html?${params.toString()}`;
     const params = new URLSearchParams({
       id: this.id,
       type: this.video_type,
-      // Include hash only for Vimeo videos
       ...(this.video_type === 'vimeo' && { hash: this.hash }),
     });
 
@@ -91,9 +68,11 @@ class VideoCard {
     if (container) {
       container.appendChild(this.el);
       videos.push(this);
+
+      if (window.imageViewer) {
+        window.imageViewer.refreshImageListeners();
+      }
     }
-    // document.getElementById('videos_wrapper')?.appendChild(this.el); // вкладываем карточку в боди в нужный див
-    // console.log(this, 'данные видео карточки');
   }
 }
 
@@ -276,5 +255,3 @@ function displayVideo(videoData) {
 }
 
 document.addEventListener('DOMContentLoaded', loadSelectedVideo);
-
-// src="https://player.vimeo.com/video/${videoData.id}?h=${videoData.hash}&responsive=1&controls=1&title=0&byline=0&portrait=0&autopause=0"

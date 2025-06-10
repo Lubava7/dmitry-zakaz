@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/archivo/v18/k3kCo_SYI-uM91cQDelH8UkWrw.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVc.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/modal.css" />
+    <title>Image Modal Viewer</title>
+  </head>
+  <body>
+    <!-- Demo Gallery -->
+    <div class="instructions">
+      <h2>
+        Click on any image to view it in full size with zoom functionality
+      </h2>
+      <p>
+        Use mouse wheel or zoom buttons to zoom in/out. Drag to pan when zoomed.
+      </p>
+    </div>
+
+    <div class="demo-gallery">
+      <img src="/images/example1.jpg" alt="Demo Image 1" class="demo-image" />
+      <img src="/images/example2.jpg" alt="Demo Image 2" class="demo-image" />
+      <img src="/images/example3.jpg" alt="Demo Image 3" class="demo-image" />
+      <img src="/images/flowers.jpg" alt="Demo Image 4" class="demo-image" />
+      <img src="/images/woman.jpg" alt="Demo Image 5" class="demo-image" />
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+      <span class="close-modal" id="closeModal">&#10005;</span>
+
+      <div class="modal-content" id="modalContent">
+        <img id="modalImage" class="modal-image" src="" alt="" />
+      </div>
+
+      <div class="zoom-controls">
+        <button class="zoom-btn" id="zoomOut">−</button>
+        <div class="zoom-info" id="zoomInfo">100%</div>
+        <button class="zoom-btn" id="zoomIn">+</button>
+        <button class="zoom-btn" id="resetZoom">⌂</button>
+      </div>
+    </div>
+
+    <script src="/js/Header.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/modal.js"></script>
+  </body>
+</html>
