@@ -120,7 +120,7 @@ nav {
   align-items: center;
   justify-content: center;
   background-color: transparent !important;
-  margin: 6rem 0 0 0;
+  margin: 2rem 0 0 0;
 }
 .photo-section .carousel {
   width: 100%;
@@ -133,6 +133,7 @@ nav {
   background-color: transparent !important;
   scroll-snap-type: x mandatory;
   box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 .photo-section .carousel::-webkit-scrollbar {
   height: 0;
@@ -251,13 +252,14 @@ span {
   gap: 15px;
   box-sizing: border-box;
   margin: 2rem 0 0 0;
-  max-width: 1100px;
+  max-width: 1900px;
   transition: all 0.3s ease;
 }
 
 .content .photo {
   min-width: 300px;
-  width: calc(48% - 5px);
+  /* width: calc(48% - 150px); */
+  width: 48vh;
   transition: all 0.3s ease;
 }
 .content .photo img {
@@ -328,22 +330,6 @@ span {
     width: 100%;
     height: auto;
   }
-  .content {
-    padding: 0 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .content .photo {
-    width: 100%;
-    text-align: center;
-    margin: 0 0 20px 0;
-  }
-  .content article {
-    width: 100%;
-  }
 
   #films_wrapper {
     margin: 0 5px;
@@ -361,7 +347,7 @@ span {
 
 @media screen and (min-width: 656px) {
   .content .photo {
-    max-width: 150px;
+    /* max-width: 150px; */
   }
 }
 
@@ -379,5 +365,30 @@ span {
     background-color: #8d8d8d;
     margin: 10px;
     cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .photo-section .carousel {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .content {
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content .photo {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 20px 0;
+  }
+  .content article {
+    width: 100%;
   }
 }

@@ -1,11 +1,14 @@
 const modalTemplate = document.createElement('template');
 let modalHtml = `
 <div id="imageModal" class="image-modal">
-  <div class="close-modal" id="closeModal"><span>&#10005;</span></div>
+  <div class="modal_icon close-modal" id="closeModal"><span>&#10005;</span></div>
   
   <div class="modal-content" id="modalContent">
     <img id="modalImage" class="modal-image" src="" alt="" />
   </div>
+
+  <div class="modal_icon nav-arrow nav-prev" id="prevImage"><span>&#8249;</span></div>
+  <div class="modal_icon nav-arrow nav-next" id="nextImage"><span>&#8250;</span></div>
 
   <div class="zoom-controls">
     <button class="zoom-btn" id="zoomOut">−</button>
@@ -40,6 +43,8 @@ class ImageModalViewer {
     this.resetZoomBtn = document.getElementById('resetZoom');
     this.zoomInfo = document.getElementById('zoomInfo');
     this.modalContent = document.getElementById('modalContent');
+    this.prevBtn = document.getElementById('prevImage');
+    this.nextBtn = document.getElementById('nextImage');
 
     this.scale = 1;
     this.maxScale = 5;
@@ -49,6 +54,9 @@ class ImageModalViewer {
     this.isDragging = false;
     this.dragStart = { x: 0, y: 0 };
     this.imagePosition = { x: 0, y: 0 };
+
+    this.images = [];
+    this.currentImageIndex = 0;
 
     this.init();
   }
@@ -68,6 +76,9 @@ class ImageModalViewer {
     this.zoomInBtn?.addEventListener('click', () => this.zoomIn());
     this.zoomOutBtn?.addEventListener('click', () => this.zoomOut());
     this.resetZoomBtn?.addEventListener('click', () => this.resetZoom());
+
+    this.prevBtn?.addEventListener('click', () => this.showPrevImage());
+    this.nextBtn?.addEventListener('click', () => this.showNextImage());
 
     this.modalImage?.addEventListener('wheel', (e) => this.handleWheel(e));
 
@@ -104,11 +115,59 @@ class ImageModalViewer {
 
     if (clickedImage === this.modalImage || !this.modal) return;
 
-    this.modalImage.src = clickedImage.src;
-    this.modalImage.alt = clickedImage.alt;
+    this.images = Array.from(document.querySelectorAll('img')).filter(
+      (img) =>
+        img.hasAttribute('data-modal-listener') && img !== this.modalImage
+    );
+
+    this.currentImageIndex = this.images.indexOf(clickedImage);
+
+    this.showCurrentImage();
     this.modal.classList.add('active');
     this.resetZoom();
     document.body.style.overflow = 'hidden';
+    this.updateNavButtons();
+  }
+
+  showCurrentImage() {
+    if (this.images[this.currentImageIndex]) {
+      this.modalImage.src = this.images[this.currentImageIndex].src;
+      this.modalImage.alt = this.images[this.currentImageIndex].alt;
+    }
+  }
+
+  showPrevImage() {
+    if (this.images.length > 1) {
+      this.currentImageIndex =
+        this.currentImageIndex > 0
+          ? this.currentImageIndex - 1
+          : this.images.length - 1;
+      this.showCurrentImage();
+      this.resetZoom();
+      this.updateNavButtons();
+    }
+  }
+
+  showNextImage() {
+    if (this.images.length > 1) {
+      this.currentImageIndex =
+        this.currentImageIndex < this.images.length - 1
+          ? this.currentImageIndex + 1
+          : 0;
+      this.showCurrentImage();
+      this.resetZoom();
+      this.updateNavButtons();
+    }
+  }
+
+  updateNavButtons() {
+    if (this.images.length <= 1) {
+      this.prevBtn.style.display = 'none';
+      this.nextBtn.style.display = 'none';
+    } else {
+      this.prevBtn.style.display = 'flex';
+      this.nextBtn.style.display = 'flex';
+    }
   }
 
   closeModal() {
@@ -200,6 +259,12 @@ class ImageModalViewer {
     switch (event.key) {
       case 'Escape':
         this.closeModal();
+        break;
+      case 'ArrowLeft':
+        this.showPrevImage();
+        break;
+      case 'ArrowRight':
+        this.showNextImage();
         break;
       case '+':
       case '=':

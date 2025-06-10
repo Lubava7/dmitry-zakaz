@@ -1,4 +1,4 @@
-console.log('commit version 22 - edited scroll on main page');
+console.log('commit version 23 - edited about page');
 // HEADER
 Header.render('.insert-header');
 Modal.render();
@@ -28,3 +28,9 @@ if (buttonLeft || buttonRight) {
     carouselDiv.scrollLeft += scrollDistance;
   });
 }
+
+// const checkWidth = document.getElementById('check_inner_width');
+
+// checkWidth.addEventListener('click', function (e) {
+//   alert('HEIGHT: ' + window.innerHeight + ', WIDTH: ' + window.innerWidth);
+// });
