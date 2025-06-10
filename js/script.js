@@ -1,4 +1,4 @@
-console.log('commit version 26');
+console.log('commit version 28');
 // HEADER
 Header.render('.insert-header');
 Modal.render();
