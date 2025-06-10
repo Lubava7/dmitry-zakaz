@@ -1,4 +1,4 @@
-console.log('commit version 21 - added modal for big photos');
+console.log('commit version 22 - edited scroll on main page');
 // HEADER
 Header.render('.insert-header');
 Modal.render();
@@ -6,16 +6,25 @@ Modal.render();
 const buttonLeft = document.getElementById('button-left');
 const buttonRight = document.getElementById('button-right');
 const carouselDiv = document.getElementById('carousel-div');
+// const photoContainer = document.getElementById('photo-cont');
 const allMenus = document.querySelectorAll('.dropdown');
+
+const gap = 10;
 
 if (buttonLeft || buttonRight) {
   buttonRight.addEventListener('click', function (e) {
     carouselDiv.style.scrollBehavior = 'smooth';
-    carouselDiv.scrollLeft += 860; // 430 чтоб был шаг в 1 фото , 860 чтоб на 2
+    const photoWidth = carouselDiv.offsetWidth * 0.5;
+
+    const scrollDistance = (photoWidth + gap) * 2;
+    carouselDiv.scrollLeft += scrollDistance;
   });
 
   buttonLeft.addEventListener('click', function (e) {
     carouselDiv.style.scrollBehavior = 'smooth';
-    carouselDiv.scrollLeft += -860; // 430 чтоб был шаг в 1 фото , 860 чтоб на 2
+    const photoWidth = carouselDiv.offsetWidth * 0.5;
+
+    const scrollDistance = (photoWidth + gap) * -2;
+    carouselDiv.scrollLeft += scrollDistance;
   });
 }
