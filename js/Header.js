@@ -1,16 +1,20 @@
 const template = document.createElement('template');
+
+const isInSubdir = window.location.pathname.includes('/pages/');
+const basePath = isInSubdir ? '../pages/' : 'pages/';
+
 let html = `
 <nav class="header">
 <div class="dropdown">
-  <a href="./films.html" class="a">film</a>
+  <a href="${basePath}films.html" class="a">film</a>
 </div>
 
 <div class="dropdown">
-  <a href="./videos.html" class="a">videos</a>
+  <a href="${basePath}videos.html" class="a">videos</a>
 </div>
 
 <div class="dropdown">
-  <a href="./about.html" class="a">about</a>
+  <a href="${basePath}about.html" class="a">about</a>
 </div>
 </nav>
   `;
