@@ -1,4 +1,4 @@
-console.log('commit version 23 - edited about page');
+console.log('commit version 25 - edited paths');
 // HEADER
 Header.render('.insert-header');
 Modal.render();

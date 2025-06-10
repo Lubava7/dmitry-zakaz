@@ -1,15 +1,15 @@
 // PHOTO CAROUSEL
 const photos = [
-  '/images/example1.jpg',
-  '/images/example2.jpg',
-  '/images/example3.jpg',
-  '/images/flowers.jpg',
-  '/images/woman.jpg',
-  '/images/example1.jpg',
-  '/images/example2.jpg',
-  '/images/example3.jpg',
-  '/images/flowers.jpg',
-  '/images/woman.jpg',
+  '../images/example1.jpg',
+  '../images/example2.jpg',
+  '../images/example3.jpg',
+  '../images/flowers.jpg',
+  '../images/woman.jpg',
+  '../images/example1.jpg',
+  '../images/example2.jpg',
+  '../images/example3.jpg',
+  '../images/flowers.jpg',
+  '../images/woman.jpg',
 ];
 
 let currentPhotoIndex = 0;
@@ -158,7 +158,7 @@ class FilmCard {
     this.el.addEventListener('click', this.navToSinglePage.bind(this));
 
     this.id = id;
-    this.url = `/images/${url}`;
+    this.url = `../images/${url}`;
     this.short_name = short_name;
     this.short_description = short_description;
     this.name = name;
@@ -278,7 +278,7 @@ function displayFilm(filmData) {
     filmContainer.innerHTML = `
       <div class="single_film_wrapper">
         <div class="film_image">
-          <img src="/images/${filmData.url}" alt="${filmData.name}" />
+          <img src="../images/${filmData.url}" alt="${filmData.name}" />
         </div>
         
         <div class="film_info">

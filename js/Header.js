@@ -2,15 +2,15 @@ const template = document.createElement('template');
 let html = `
 <nav class="header">
 <div class="dropdown">
-  <a href="pages/films.html" class="a">film</a>
+  <a href="../pages/films.html" class="a">film</a>
 </div>
 
 <div class="dropdown">
-  <a href="pages/videos.html" class="a">videos</a>
+  <a href="../pages/videos.html" class="a">videos</a>
 </div>
 
 <div class="dropdown">
-  <a href="pages/about.html" class="a">about</a>
+  <a href="../pages/about.html" class="a">about</a>
 </div>
 </nav>
   `;
