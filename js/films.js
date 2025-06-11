@@ -1,33 +1,76 @@
+const isInPicSubdir = window.location.pathname.includes('/images/');
+const basePicPath = isInPicSubdir ? '../images/projects/' : '/images/projects/';
+
+function imageExists(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
+
+async function scanProjectImages(projectId, maxImages = 5) {
+  const foundImages = [];
+
+  const namingPatterns = [
+    (i) => `${i}.jpg`, // 1.jpg, 2.jpg, etc.
+    (i) => `${i}.jpeg`, // 1.jpeg, 2.jpeg, etc.
+    (i) => `${i}.png`, // 1.png, 2.png, etc.
+    (i) => `image${i}.jpg`, // image1.jpg, image2.jpg, etc.
+  ];
+
+  for (const pattern of namingPatterns) {
+    for (let i = 1; i <= maxImages; i++) {
+      const filename = pattern(i);
+      const imagePath = `${basePicPath}${projectId}/${filename}`;
+
+      const exists = await imageExists(imagePath);
+
+      if (exists) {
+        foundImages.push(imagePath);
+      }
+    }
+  }
+
+  const uniqueImages = [...new Set(foundImages)].sort();
+  return uniqueImages;
+}
+
 // PHOTO CAROUSEL
-const photos = [
-  '../images/example1.jpg',
-  '../images/example2.jpg',
-  '../images/example3.jpg',
-  '../images/flowers.jpg',
-  '../images/woman.jpg',
-  '../images/example1.jpg',
-  '../images/example2.jpg',
-  '../images/example3.jpg',
-  '../images/flowers.jpg',
-  '../images/woman.jpg',
-];
+let photos = [];
 
 let currentPhotoIndex = 0;
-const totalPhotos = photos.length;
+let totalPhotos = photos.length;
 const visibleThumbnails = 3;
 
 function initializeCarousel() {
   const mainPhotosContainer = document.getElementById('main-photos-container');
   const thumbnailsContainer = document.getElementById('thumbnails');
 
+  if (mainPhotosContainer) {
+    mainPhotosContainer.innerHTML = '';
+  }
+  if (thumbnailsContainer) {
+    thumbnailsContainer.innerHTML = '';
+  }
+
   photos.forEach((photo, index) => {
+    // Create main photo item with actual img element for modal functionality
     const mainPhotoItem = document.createElement('div');
     mainPhotoItem.className = 'main-photo-item';
     if (index === 0) mainPhotoItem.classList.add('active');
-    mainPhotoItem.style.backgroundImage = `url('${photo}')`;
 
-    const img = new Image();
+    // Create actual img element instead of background image
+    const img = document.createElement('img');
     img.src = photo;
+    img.alt = `Photo ${index + 1}`;
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.display = 'block';
+
+    mainPhotoItem.appendChild(img);
     mainPhotosContainer?.appendChild(mainPhotoItem);
   });
 
@@ -47,6 +90,13 @@ function initializeCarousel() {
       thumbImg.src = photo;
       thumbnailsContainer?.appendChild(thumbnail);
     });
+  }
+
+  // Refresh modal listeners after creating new images
+  if (window.imageViewer) {
+    setTimeout(() => {
+      window.imageViewer.refreshImageListeners();
+    }, 100);
   }
 }
 
@@ -121,6 +171,14 @@ function goToPhoto(index) {
   showPhoto(currentPhotoIndex);
 }
 
+function updateCarouselPhotos(newPhotos) {
+  photos = [...newPhotos];
+  totalPhotos = photos.length;
+  currentPhotoIndex = 0;
+  initializeCarousel();
+  showPhoto(0);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initializeCarousel();
   showPhoto(0);
@@ -165,13 +223,13 @@ class FilmCard {
     this.description = description;
 
     this.el.innerHTML = `
-        <img src="${this.url}" />
-        <div class="layout">
-          <h1>${this.short_name}</h1>
-          <h1>&#8212;</h1>
-          <p>${this.short_description}</p>
-        </div>
-    `;
+            <img src="${this.url}" />
+            <div class="layout">
+              <h1>${this.short_name}</h1>
+              <h1>&#8212;</h1>
+              <p>${this.short_description}</p>
+            </div>
+        `;
 
     this.render();
   }
@@ -201,16 +259,17 @@ class FilmCard {
 const film_data = [
   {
     id: 'film_1',
-    url: 'example1.jpg',
+    url: 'example4.jpg',
     short_name: 'Saint Laurent',
     short_description: 'pre fall 2024',
     name: 'Saint Laurent Collection',
     description:
       'Detailed description of Saint Laurent pre fall 2024 collection',
   },
+
   {
     id: 'film_2',
-    url: 'example2.jpg',
+    url: 'example5.jpg',
     short_name: 'Vans',
     short_description: 'spring 2025',
     name: 'Vans Spring Collection',
@@ -218,7 +277,7 @@ const film_data = [
   },
   {
     id: 'film_3',
-    url: 'woman.jpg',
+    url: 'example6.jpg',
     short_name: 'Rimova',
     short_description: 'fall 2024',
     name: 'Rimova Fall Collection',
@@ -226,7 +285,7 @@ const film_data = [
   },
   {
     id: 'film_4',
-    url: 'flowers.jpg',
+    url: 'example7.jpg',
     short_name: 'Vans',
     short_description: 'spring 2025',
     name: 'Vans Floral Campaign',
@@ -234,7 +293,7 @@ const film_data = [
   },
   {
     id: 'film_5',
-    url: 'example3.jpg',
+    url: 'example8.jpg',
     short_name: 'Rimova',
     short_description: 'fall 2024',
     name: 'Rimova Autumn Series',
@@ -271,33 +330,54 @@ function loadSelectedFilm() {
   }
 }
 
-function displayFilm(filmData) {
+async function displayFilm(filmData) {
   const filmContainer = document.getElementById('single_film_container');
 
   if (filmContainer) {
-    filmContainer.innerHTML = `
-      <div class="single_film_wrapper">
-        <div class="film_image">
-          <img src="../images/${filmData.url}" alt="${filmData.name}" />
-        </div>
-        
-        <div class="film_info">
-          <h3 class="film_title">
-           <strong>
-            ${filmData.name}
-           </strong>
-          </h3>
-          <h2 class="film_subtitle">${filmData.short_name} &#8212; ${filmData.short_description}</h2>
-          <p class="film_description">${filmData.description}</p>
-        </div>
-      </div>
-    `;
+    const loadingDiv = document.createElement('div');
+    loadingDiv.innerHTML = 'Loading images...';
+    loadingDiv.style.textAlign = 'center';
+    loadingDiv.style.padding = '20px';
+    filmContainer.appendChild(loadingDiv);
 
+    try {
+      const projectImages = await scanProjectImages(filmData.id);
+
+      if (projectImages.length > 0) {
+        console.log(`Found ${projectImages.length} images for ${filmData.id}`);
+        updateCarouselPhotos(projectImages);
+      } else {
+        console.log(
+          `No dynamic images found for ${filmData.id}, using fallback`
+        );
+        const fallbackImages = [
+          '../images/example1.jpg',
+          '../images/example2.jpg',
+          '../images/example3.jpg',
+        ];
+        updateCarouselPhotos(fallbackImages);
+      }
+    } catch (error) {
+      console.error('Error loading images:', error);
+      const fallbackImages = [
+        '../images/example1.jpg',
+        '../images/example2.jpg',
+        '../images/example3.jpg',
+      ];
+      updateCarouselPhotos(fallbackImages);
+    }
+
+    if (loadingDiv.parentNode) {
+      loadingDiv.parentNode.removeChild(loadingDiv);
+    }
+
+    // Ensure modal listeners are added after images are loaded
     if (window.imageViewer) {
-      window.imageViewer.refreshImageListeners();
+      setTimeout(() => {
+        window.imageViewer.refreshImageListeners();
+      }, 500);
     }
   }
 }
 
-// Запускаем функцию загрузки при загрузке страницы film.html
 document.addEventListener('DOMContentLoaded', loadSelectedFilm);

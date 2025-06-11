@@ -1,4 +1,4 @@
-console.log('commit version 30');
+console.log('commit version 31 - added FS script for photos');
 // HEADER
 Header.render('.insert-header');
 

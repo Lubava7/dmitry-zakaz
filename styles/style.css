@@ -43,16 +43,6 @@ body {
   width: 100%;
 }
 
-/* .scroll-circle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  z-index: 5;
-  position: absolute;
-} */
-
 .scroll-circle {
   width: 10px;
   height: 10px;
@@ -113,10 +103,8 @@ nav {
 
 /* PHOTO CAROUSEL */
 .photo-section {
-  /* width: 85%; */
   width: 100%;
   height: 80vh;
-  /* max-width: 1900px; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -141,7 +129,6 @@ nav {
   height: 0;
 }
 .photo-section .photo-cont {
-  /* width: 49%; */
   width: 100%;
   flex-shrink: 0;
   box-sizing: border-box;
@@ -151,7 +138,6 @@ nav {
 }
 
 .two-pics img {
-  /* flex: 1; */
   width: 48%;
   height: 100%;
   object-fit: cover;
@@ -165,7 +151,6 @@ nav {
 }
 
 .one-pic img {
-  /* flex: 1; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -178,7 +163,6 @@ nav {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  /* width: 100%; */
   height: 100%;
   column-gap: 5px;
   row-gap: 0px;
@@ -190,7 +174,8 @@ nav {
   min-width: 323px;
   min-height: 182px;
   width: calc(50% - 5px);
-  aspect-ratio: 6 / 9;
+  /* aspect-ratio: 6 / 9; */
+  aspect-ratio: 3 / 2;
 }
 
 #films_wrapper #film img {
@@ -237,6 +222,14 @@ span {
   backdrop-filter: blur(4px);
 }
 
+#single_film_container .film_image {
+  width: 200px;
+  height: 400px;
+}
+.film_image img {
+  width: 100%;
+}
+
 /* ABOUT */
 .about_heading {
   font-size: 1.625rem;
@@ -257,7 +250,6 @@ span {
 
 .content .photo {
   min-width: 300px;
-  /* width: calc(48% - 150px); */
   width: 48vh;
   transition: all 0.3s ease;
 }

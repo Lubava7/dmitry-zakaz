@@ -5,6 +5,7 @@ let modalHtml = `
   
   <div class="modal-content" id="modalContent">
     <img id="modalImage" class="modal-image" src="" alt="" />
+    <div class="image-counter" id="imageCounter">1 / 1</div>
   </div>
 
   <div class="modal_icon nav-arrow nav-prev scroll-circle-modal" id="prevImage"></div>
@@ -34,6 +35,7 @@ class ImageModalViewer {
     this.modalContent = document.getElementById('modalContent');
     this.prevBtn = document.getElementById('prevImage');
     this.nextBtn = document.getElementById('nextImage');
+    this.imageCounter = document.getElementById('imageCounter');
 
     this.scale = 1;
     this.maxScale = 5;
@@ -62,8 +64,14 @@ class ImageModalViewer {
       if (e.target === this.modal) this.closeModal();
     });
 
-    this.prevBtn?.addEventListener('click', () => this.showPrevImage());
-    this.nextBtn?.addEventListener('click', () => this.showNextImage());
+    this.prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.showPrevImage();
+    });
+    this.nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.showNextImage();
+    });
 
     this.modalImage?.addEventListener('wheel', (e) => this.handleWheel(e));
 
@@ -100,6 +108,7 @@ class ImageModalViewer {
 
     if (clickedImage === this.modalImage || !this.modal) return;
 
+    // Get all images that have modal listeners
     this.images = Array.from(document.querySelectorAll('img')).filter(
       (img) =>
         img.hasAttribute('data-modal-listener') && img !== this.modalImage
@@ -112,6 +121,7 @@ class ImageModalViewer {
     this.resetZoom();
     document.body.style.overflow = 'hidden';
     this.updateNavButtons();
+    this.updateImageCounter();
   }
 
   showCurrentImage() {
@@ -130,6 +140,10 @@ class ImageModalViewer {
       this.showCurrentImage();
       this.resetZoom();
       this.updateNavButtons();
+      this.updateImageCounter();
+
+      // Update carousel if we're on film page
+      this.syncWithCarousel();
     }
   }
 
@@ -142,16 +156,49 @@ class ImageModalViewer {
       this.showCurrentImage();
       this.resetZoom();
       this.updateNavButtons();
+      this.updateImageCounter();
+
+      // Update carousel if we're on film page
+      this.syncWithCarousel();
+    }
+  }
+
+  syncWithCarousel() {
+    // Check if we're on a page with carousel functions
+    if (typeof goToPhoto === 'function' && typeof photos !== 'undefined') {
+      const currentImageSrc = this.images[this.currentImageIndex].src;
+      const carouselIndex = photos.findIndex((photo) => {
+        // Handle relative path differences
+        const photoPath = photo.replace('../', '');
+        const imagePath = currentImageSrc.split('/').slice(-2).join('/');
+        return photoPath.includes(imagePath) || imagePath.includes(photoPath);
+      });
+
+      if (carouselIndex !== -1 && carouselIndex !== currentPhotoIndex) {
+        goToPhoto(carouselIndex);
+      }
     }
   }
 
   updateNavButtons() {
+    if (!this.prevBtn || !this.nextBtn) return;
+
     if (this.images.length <= 1) {
       this.prevBtn.style.display = 'none';
       this.nextBtn.style.display = 'none';
     } else {
       this.prevBtn.style.display = 'flex';
       this.nextBtn.style.display = 'flex';
+    }
+  }
+
+  updateImageCounter() {
+    if (this.imageCounter) {
+      this.imageCounter.textContent = `${this.currentImageIndex + 1} / ${
+        this.images.length
+      }`;
+      this.imageCounter.style.display =
+        this.images.length > 1 ? 'block' : 'none';
     }
   }
 
@@ -246,19 +293,24 @@ class ImageModalViewer {
         this.closeModal();
         break;
       case 'ArrowLeft':
+        event.preventDefault();
         this.showPrevImage();
         break;
       case 'ArrowRight':
+        event.preventDefault();
         this.showNextImage();
         break;
       case '+':
       case '=':
+        event.preventDefault();
         this.zoomIn();
         break;
       case '-':
+        event.preventDefault();
         this.zoomOut();
         break;
       case '0':
+        event.preventDefault();
         this.resetZoom();
         break;
     }
@@ -297,7 +349,7 @@ class ImageModalViewer {
   }
 }
 
-// убираем модалку на мобильных
+// Initialize modal on appropriate screen sizes
 let modalInitialized = false;
 
 function checkScreenSize() {
