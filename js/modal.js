@@ -302,7 +302,6 @@ let modalInitialized = false;
 
 function checkScreenSize() {
   const isMobile = window.innerWidth <= 768;
-  console.log('Screen width:', window.innerWidth, 'isMobile:', isMobile);
 
   if (!isMobile && !modalInitialized) {
     Modal.render();
