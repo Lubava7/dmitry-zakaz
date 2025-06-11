@@ -351,18 +351,22 @@ async function displayFilm(filmData) {
           `No dynamic images found for ${filmData.id}, using fallback`
         );
         const fallbackImages = [
-          '../images/example1.jpg',
-          '../images/example2.jpg',
-          '../images/example3.jpg',
+          '../images/example4.jpg',
+          '../images/example5.jpg',
+          '../images/example6.jpg',
+          '../images/example7.jpg',
+          '../images/example8.jpg',
         ];
         updateCarouselPhotos(fallbackImages);
       }
     } catch (error) {
       console.error('Error loading images:', error);
       const fallbackImages = [
-        '../images/example1.jpg',
-        '../images/example2.jpg',
-        '../images/example3.jpg',
+        '../images/example4.jpg',
+        '../images/example5.jpg',
+        '../images/example6.jpg',
+        '../images/example7.jpg',
+        '../images/example8.jpg',
       ];
       updateCarouselPhotos(fallbackImages);
     }
