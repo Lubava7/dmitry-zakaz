@@ -7,15 +7,8 @@ let modalHtml = `
     <img id="modalImage" class="modal-image" src="" alt="" />
   </div>
 
-  <div class="modal_icon nav-arrow nav-prev" id="prevImage"><span>&#8249;</span></div>
-  <div class="modal_icon nav-arrow nav-next" id="nextImage"><span>&#8250;</span></div>
-
-  <div class="zoom-controls">
-    <button class="zoom-btn" id="zoomOut">−</button>
-    <div class="zoom-info" id="zoomInfo">100%</div>
-    <button class="zoom-btn" id="zoomIn">+</button>
-    <button class="zoom-btn" id="resetZoom">⌂</button>
-  </div>
+  <div class="modal_icon nav-arrow nav-prev scroll-circle-modal" id="prevImage"></div>
+  <div class="modal_icon nav-arrow nav-next scroll-circle-modal" id="nextImage"></div>
 </div>
 `;
 
@@ -38,10 +31,6 @@ class ImageModalViewer {
     this.modal = document.getElementById('imageModal');
     this.modalImage = document.getElementById('modalImage');
     this.closeBtn = document.getElementById('closeModal');
-    this.zoomInBtn = document.getElementById('zoomIn');
-    this.zoomOutBtn = document.getElementById('zoomOut');
-    this.resetZoomBtn = document.getElementById('resetZoom');
-    this.zoomInfo = document.getElementById('zoomInfo');
     this.modalContent = document.getElementById('modalContent');
     this.prevBtn = document.getElementById('prevImage');
     this.nextBtn = document.getElementById('nextImage');
@@ -72,10 +61,6 @@ class ImageModalViewer {
     this.modal.addEventListener('click', (e) => {
       if (e.target === this.modal) this.closeModal();
     });
-
-    this.zoomInBtn?.addEventListener('click', () => this.zoomIn());
-    this.zoomOutBtn?.addEventListener('click', () => this.zoomOut());
-    this.resetZoomBtn?.addEventListener('click', () => this.resetZoom());
 
     this.prevBtn?.addEventListener('click', () => this.showPrevImage());
     this.nextBtn?.addEventListener('click', () => this.showNextImage());
@@ -294,10 +279,6 @@ class ImageModalViewer {
 
     this.modalImage.style.transform = transform;
 
-    if (this.zoomInfo) {
-      this.zoomInfo.textContent = `${Math.round(this.scale * 100)}%`;
-    }
-
     if (this.scale > 1) {
       this.modalImage.classList.add('zoomed');
     } else {
@@ -316,28 +297,37 @@ class ImageModalViewer {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  Modal.render();
+// убираем модалку на мобильных
+let modalInitialized = false;
 
-  setTimeout(() => {
-    window.imageViewer = new ImageModalViewer();
-  }, 100);
-});
+function checkScreenSize() {
+  const isMobile = window.innerWidth <= 768;
+  console.log('Screen width:', window.innerWidth, 'isMobile:', isMobile);
+
+  if (!isMobile && !modalInitialized) {
+    Modal.render();
+    setTimeout(() => {
+      if (!window.imageViewer) {
+        window.imageViewer = new ImageModalViewer();
+      }
+    }, 100);
+    modalInitialized = true;
+  } else if (isMobile && modalInitialized) {
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+      modal.remove();
+    }
+    window.imageViewer = null;
+    modalInitialized = false;
+  }
+}
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    if (!window.imageViewer) {
-      Modal.render();
-      setTimeout(() => {
-        window.imageViewer = new ImageModalViewer();
-      }, 100);
-    }
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
   });
 } else {
-  if (!window.imageViewer) {
-    Modal.render();
-    setTimeout(() => {
-      window.imageViewer = new ImageModalViewer();
-    }, 100);
-  }
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
 }

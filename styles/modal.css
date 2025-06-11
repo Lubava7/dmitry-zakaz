@@ -68,6 +68,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.scroll-circle-modal {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
 .close-modal {
   top: 20px;
   right: 30px;
@@ -107,47 +118,6 @@
   align-items: center;
 }
 
-.zoom-controls {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10001;
-}
-
-.zoom-btn {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.zoom-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
-}
-
-.zoom-info {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 25px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  min-width: 60px;
-  justify-content: center;
-}
-
 .demo-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -175,5 +145,4 @@
   text-align: center;
   padding: 20px;
   color: #666;
-  font-family: Arial, sans-serif;
 }

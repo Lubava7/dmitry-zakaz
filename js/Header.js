@@ -6,7 +6,7 @@ const basePath = isInSubdir ? '../pages/' : 'pages/';
 let html = `
 <nav class="header">
 <div class="dropdown">
-  <a href="${basePath}films.html" class="a">film</a>
+  <a href="${basePath}films.html" class="a">pictures</a>
 </div>
 
 <div class="dropdown">
