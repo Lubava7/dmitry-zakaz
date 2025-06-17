@@ -34,8 +34,10 @@ class VideoCard {
 
     if (this.video_type === 'vimeo') {
       iframeSrc = `https://player.vimeo.com/video/${this.id}?h=${this.hash}&responsive=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&autopause=0`;
+      // thumbnailUrl = `https://vumbnail.com/${this.id}.jpg`;
     } else if (this.video_type === 'youtube') {
       iframeSrc = `https://www.youtube.com/embed/${this.id}?enablejsapi=1&iv_load_policy=3&autoplay=1&loop=1&mute=1&controls=0&fs=0&disablekb=1&rel=0&showinfo=0&playlist=${this.id}`;
+      // thumbnailUrl = `https://img.youtube.com/vi/${this.id}/maxresdefault.jpg`;
     }
 
     return `
@@ -43,6 +45,7 @@ class VideoCard {
         src="${iframeSrc}"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+        loading="lazy"
        
       >
       </iframe>

@@ -91,10 +91,12 @@
   font-size: 3rem;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
-.close-modal:hover {
-  color: #ff6b6b;
+.close-modal span svg {
+  width: 60px;
+  height: 60px;
 }
 
 .nav-arrow {

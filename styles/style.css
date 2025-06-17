@@ -108,7 +108,7 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: transparent !important;
   margin: 2rem 0 0 0;
 }
@@ -214,12 +214,20 @@ span {
 
 #film:hover .layout {
   opacity: 1;
+
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  will-change: backdrop-filter;
+  transform: translateZ(0);
 }
 
 #video:hover .layout {
   opacity: 1;
+
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  will-change: backdrop-filter;
+  transform: translateZ(0);
 }
 
 #single_film_container .film_image {

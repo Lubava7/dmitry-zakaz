@@ -56,12 +56,10 @@ function initializeCarousel() {
   }
 
   photos.forEach((photo, index) => {
-    // Create main photo item with actual img element for modal functionality
     const mainPhotoItem = document.createElement('div');
     mainPhotoItem.className = 'main-photo-item';
     if (index === 0) mainPhotoItem.classList.add('active');
 
-    // Create actual img element instead of background image
     const img = document.createElement('img');
     img.src = photo;
     img.alt = `Photo ${index + 1}`;
@@ -92,7 +90,6 @@ function initializeCarousel() {
     });
   }
 
-  // Refresh modal listeners after creating new images
   if (window.imageViewer) {
     setTimeout(() => {
       window.imageViewer.refreshImageListeners();

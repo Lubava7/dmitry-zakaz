@@ -18,6 +18,11 @@
       type="font/woff2"
       crossorigin
     />
+
+    <link rel="preload" href="../js/Header.js" as="script" />
+    <link rel="preload" href="../js/videos.js" as="script" />
+    <link rel="preload" href="../js/script.js" as="script" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,6 +36,10 @@
     <title>video</title>
   </head>
   <body>
+    <script defer src="../js/Header.js"></script>
+    <script defer src="../js/videos.js"></script>
+    <script defer src="../js/script.js"></script>
+
     <a id="heading" href="../index.html">DIMA ZIMNICKIY</a>
     <!-- здесь header -->
     <div class="insert-header"></div>
@@ -40,9 +49,5 @@
     <div id="videos_wrapper">
       <!-- тут грид с видео -->
     </div>
-
-    <script src="../js/Header.js"></script>
-    <script src="../js/videos.js"></script>
-    <script src="../js/script.js"></script>
   </body>
 </html>
