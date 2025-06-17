@@ -62,8 +62,8 @@
   z-index: 10001;
   transition: all 0.3s ease;
   background: transparent;
-  width: 90px;
-  height: 90px;
+  /* width: 90px;
+  height: 90px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,16 +72,21 @@
 .scroll-circle-modal {
   width: 10px;
   height: 10px;
+
+  /* width: 1px;
+  height: 2000px; */
+
   border-radius: 50%;
   background-color: #ffffff;
-  margin: 10px;
+  margin: 17px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .close-modal {
-  top: 20px;
-  right: 30px;
+  /* top: 20px; */
+  right: 28px;
+  top: calc(5vh - 22.5px);
 }
 
 .close-modal span {
@@ -95,13 +100,14 @@
 }
 
 .close-modal span svg {
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
 }
 
 .nav-arrow {
   top: 50%;
   user-select: none;
+  transform: translateY(-50%);
 }
 
 .nav-prev {
@@ -109,7 +115,8 @@
 }
 
 .nav-next {
-  right: 20px;
+  /* right: 20px; */
+  right: 28px;
 }
 .nav-arrow span {
   width: 100%;
