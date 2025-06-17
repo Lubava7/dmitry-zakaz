@@ -1,5 +1,7 @@
 const isInPicSubdir = window.location.pathname.includes('/images/');
-const basePicPath = isInPicSubdir ? '../images/projects/' : '/images/projects/';
+const basePicPath = isInPicSubdir
+  ? '../images/projects/'
+  : '../images/projects/';
 
 function imageExists(url) {
   return new Promise((resolve) => {
