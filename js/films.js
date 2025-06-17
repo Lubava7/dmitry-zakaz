@@ -25,6 +25,8 @@ async function scanProjectImages(projectId, maxImages = 5) {
       const filename = pattern(i);
       const imagePath = `${basePicPath}${projectId}/${filename}`;
 
+      console.log('imagePath', imagePath);
+
       const exists = await imageExists(imagePath);
 
       if (exists) {
@@ -339,6 +341,7 @@ async function displayFilm(filmData) {
 
     try {
       const projectImages = await scanProjectImages(filmData.id);
+      console.log('projectImages', projectImages);
 
       if (projectImages.length > 0) {
         console.log(`Found ${projectImages.length} images for ${filmData.id}`);
