@@ -1,4 +1,4 @@
-console.log('commit version 35 - final edits');
+console.log('commit version 36 - final edits for photows');
 // HEADER
 Header.render('.insert-header');
 
