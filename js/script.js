@@ -1,4 +1,4 @@
-console.log('commit version 45 - edited files for hosting');
+console.log('commit version 46 - edited files for hosting');
 // HEADER
 Header.render('.insert-header');
 
