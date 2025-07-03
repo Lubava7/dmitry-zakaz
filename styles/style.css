@@ -174,13 +174,13 @@ nav {
   min-width: 323px;
   min-height: 182px;
   width: calc(50% - 5px);
-  /* aspect-ratio: 6 / 9; */
   aspect-ratio: 3 / 2;
 }
 
 #films_wrapper #film img {
   width: 100%;
   height: calc(100% - 5px);
+  object-fit: cover;
 }
 
 .layout {

@@ -30,35 +30,6 @@ async function scanProjectImages(projectId) {
   }
 }
 
-// async function scanProjectImages(projectId, maxImages = 5) {
-//   const foundImages = [];
-
-//   const namingPatterns = [
-//     (i) => `${i}.jpg`, // 1.jpg, 2.jpg, etc.
-//     (i) => `${i}.jpeg`, // 1.jpeg, 2.jpeg, etc.
-//     (i) => `${i}.png`, // 1.png, 2.png, etc.
-//     (i) => `image${i}.jpg`, // image1.jpg, image2.jpg, etc.
-//   ];
-
-//   for (const pattern of namingPatterns) {
-//     for (let i = 1; i <= maxImages; i++) {
-//       const filename = pattern(i);
-//       const imagePath = `${basePicPath}${projectId}/${filename}`;
-
-//       console.log('imagePath', imagePath);
-
-//       const exists = await imageExists(imagePath);
-
-//       if (exists) {
-//         foundImages.push(imagePath);
-//       }
-//     }
-//   }
-
-//   const uniqueImages = [...new Set(foundImages)].sort();
-//   return uniqueImages;
-// }
-
 // PHOTO CAROUSEL
 let photos = [];
 
@@ -278,7 +249,7 @@ class FilmCard {
 const film_data = [
   {
     id: 'film_1', // айди проекта - название проекта в папке images/projects
-    url: 'example4.jpg', // фото которое будет видно в списке фото
+    url: 'projects/film_1/1.jpg', // фото которое будет видно в списке фото
     short_name: 'MAYOT', // подпись к фото при наведении
     short_description: 'Сможем ли мы', // подпись к фото при наведении
     name: 'Сможем ли мы', // подпись к фото при наведении
@@ -287,36 +258,13 @@ const film_data = [
   },
 
   {
-    id: 'film_2',
-    url: 'example5.jpg',
-    short_name: 'Vans',
-    short_description: 'spring 2025',
-    name: 'Vans Spring Collection',
-    description: 'Vans spring 2025 creative campaign showcase',
-  },
-  {
-    id: 'film_3',
-    url: 'example6.jpg',
-    short_name: 'Rimova',
-    short_description: 'fall 2024',
-    name: 'Rimova Fall Collection',
-    description: 'Rimova fall 2024 fashion photography series',
-  },
-  {
-    id: 'film_4',
-    url: 'example7.jpg',
-    short_name: 'Vans',
-    short_description: 'spring 2025',
-    name: 'Vans Floral Campaign',
-    description: 'Vans spring 2025 floral themed campaign',
-  },
-  {
-    id: 'film_5',
-    url: 'example8.jpg',
-    short_name: 'Rimova',
-    short_description: 'fall 2024',
-    name: 'Rimova Autumn Series',
-    description: 'Rimova fall 2024 artistic photography collection',
+    id: 'film_1', // айди проекта - название проекта в папке images/projects
+    url: 'projects/film_1/1.jpg', // фото которое будет видно в списке фото
+    short_name: 'MAYOT', // подпись к фото при наведении
+    short_description: 'Сможем ли мы', // подпись к фото при наведении
+    name: 'Сможем ли мы', // подпись к фото при наведении
+    description:
+      'Detailed description of Saint Laurent pre fall 2024 collection', // описание к фото
   },
 ];
 
