@@ -10,31 +10,27 @@ const carouselDiv = document.getElementById('carousel-div');
 const allMenus = document.querySelectorAll('.dropdown');
 const gap = 10;
 
-// динамически грузим фотки из папок
-const photoData = {
-  twoPicFolders: [
-    { folder: '1', images: ['1.jpg', '2.jpg'] },
-    { folder: '2', images: ['1.jpg', '2.jpg'] },
-    { folder: '3', images: ['1.jpg', '2.jpg'] },
-    { folder: '4', images: ['1.jpg', '2.jpg'] },
-    { folder: '5', images: ['1.jpg', '2.jpg'] },
-    { folder: '6', images: ['1.jpg', '2.jpg'] },
-    { folder: '7', images: ['1.jpg', '2.jpg'] },
-    { folder: '8', images: ['1.jpg', '2.jpg'] },
-  ],
-
-  singlePhotos: [
-    'Di.jpg',
-    'Diana.jpg',
-    'Eva Pool.jpg',
-    'Eva.jpg',
-    'Natasha.jpg',
-    'Saule 1.jpg',
-    'Saule 2.jpg',
-    'Saule 3.jpg',
-    'Vika.jpg',
-  ],
-};
+// динамически грузим фотки из массива в произвольном порядке
+const photoOrder = [
+  { type: 'pair', folder: '1', images: ['1.jpg', '2.jpg'] },
+  { type: 'single', image: 'Di.jpg' },
+  { type: 'pair', folder: '2', images: ['1.jpg', '2.jpg'] },
+  { type: 'single', image: 'Diana.jpg' },
+  { type: 'pair', folder: '3', images: ['1.jpg', '2.jpg'] },
+  { type: 'single', image: 'Eva Pool.jpg' },
+  { type: 'pair', folder: '4', images: ['1.jpg', '2.jpg'] },
+  { type: 'single', image: 'Eva.jpg' },
+  { type: 'pair', folder: '5', images: ['1.jpg', '2.jpg'] },
+  { type: 'single', image: 'Natasha.jpg' },
+  { type: 'pair', folder: '6', images: ['1.jpg', '2.jpg'] },
+  { type: 'single', image: 'Saule.jpg' },
+  { type: 'single', image: 'Saule 1.jpg' },
+  { type: 'single', image: 'Saule 2.jpg' },
+  { type: 'single', image: 'Saule 3.jpg' },
+  { type: 'pair', folder: '7', images: ['1.jpg', '2.jpg'] },
+  { type: 'pair', folder: '8', images: ['1.jpg', '2.jpg'] },
+  { type: 'single', image: 'Vika.jpg' },
+];
 
 function createImageElement(src, alt) {
   const img = document.createElement('img');
@@ -58,62 +54,26 @@ function createImageElement(src, alt) {
 
 function loadPhotos() {
   carouselDiv.innerHTML = '';
-
-  const twoPicDivs = [];
-  const onePicDivs = [];
-
-  photoData.twoPicFolders.forEach((folder) => {
-    const div = document.createElement('div');
-    div.className = 'photo-cont two-pics';
-
-    folder.images.forEach((imageName) => {
-      const img = createImageElement(
-        `images/main/${folder.folder}/${imageName}`,
-        imageName
-      );
+  photoOrder.forEach((item) => {
+    if (item.type === 'pair') {
+      const div = document.createElement('div');
+      div.className = 'photo-cont two-pics';
+      item.images.forEach((imageName) => {
+        const img = createImageElement(
+          `images/main/${item.folder}/${imageName}`,
+          imageName
+        );
+        div.appendChild(img);
+      });
+      carouselDiv.appendChild(div);
+    } else if (item.type === 'single') {
+      const div = document.createElement('div');
+      div.className = 'photo-cont one-pic';
+      const img = createImageElement(`images/main/${item.image}`, item.image);
       div.appendChild(img);
-    });
-
-    twoPicDivs.push(div);
-  });
-
-  photoData.singlePhotos.forEach((photoName) => {
-    const div = document.createElement('div');
-    div.className = 'photo-cont one-pic';
-
-    const img = createImageElement(`images/main/${photoName}`, photoName);
-    div.appendChild(img);
-
-    onePicDivs.push(div);
-  });
-
-  const maxLength = Math.max(twoPicDivs.length, onePicDivs.length);
-  let twoPicIndex = 0;
-  let onePicIndex = 0;
-
-  for (let i = 0; i < maxLength * 2; i++) {
-    if (i % 2 === 0) {
-      if (twoPicIndex < twoPicDivs.length) {
-        carouselDiv.appendChild(twoPicDivs[twoPicIndex]);
-        twoPicIndex++;
-      }
-    } else {
-      if (onePicIndex < onePicDivs.length) {
-        carouselDiv.appendChild(onePicDivs[onePicIndex]);
-        onePicIndex++;
-      }
+      carouselDiv.appendChild(div);
     }
-  }
-
-  while (twoPicIndex < twoPicDivs.length) {
-    carouselDiv.appendChild(twoPicDivs[twoPicIndex]);
-    twoPicIndex++;
-  }
-  while (onePicIndex < onePicDivs.length) {
-    carouselDiv.appendChild(onePicDivs[onePicIndex]);
-    onePicIndex++;
-  }
-
+  });
   console.log('Photos loaded successfully');
   setTimeout(setupInfiniteCarousel, 100);
 }
