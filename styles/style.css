@@ -48,7 +48,7 @@ body {
   height: 10px;
   border-radius: 50%;
   background-color: #8d8d8d;
-  margin: 10px;
+  margin: 10px 50px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -79,6 +79,7 @@ nav {
 .dropdown a {
   color: hsla(0, 0%, 0%, 1);
   font-size: calc((1.2 - 1) * 1.2vw + 1rem);
+  transition: all 0.3 ease;
 }
 
 .dropdown a:hover {
@@ -91,14 +92,14 @@ nav {
   justify-content: center;
   position: relative;
   text-align: center;
-  padding: 0 15px;
+  padding: 0 5px;
 }
 .dropdown:not(:last-child) {
-  border-right: 1px solid black;
+  /* border-right: 1px solid black; */
 }
 
 .dropdown:hover:not(:last-child) {
-  border-right: 1px solid #858585;
+  /* border-right: 1px solid #858585; */
 }
 
 /* PHOTO CAROUSEL */
@@ -312,6 +313,14 @@ span {
 @media screen and (max-width: 620px) {
   .a {
     font-size: 12px;
+  }
+
+  .dropdown a {
+    line-height: 2.5rem;
+  }
+
+  nav {
+    /* flex-wrap: wrap; */
   }
 }
 @media screen and (max-width: 415px) {
