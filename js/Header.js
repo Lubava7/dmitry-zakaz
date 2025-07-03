@@ -5,8 +5,13 @@ const basePath = isInSubdir ? '../pages/' : 'pages/';
 
 let html = `
 <nav class="header">
+
 <div class="dropdown">
-  <a href="${basePath}films.html" class="a">pictures</a>
+  <a href="../index.html" class="a">portfolio</a>
+</div>
+
+<div class="dropdown">
+  <a href="${basePath}films.html" class="a">projects</a>
 </div>
 
 <div class="dropdown">
@@ -14,8 +19,9 @@ let html = `
 </div>
 
 <div class="dropdown">
-  <a href="${basePath}about.html" class="a">about</a>
+  <a href="${basePath}about.html" class="a">about me</a>
 </div>
+
 </nav>
   `;
 

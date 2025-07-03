@@ -1,4 +1,4 @@
-console.log('commit version 39 - edited modal arrows');
+console.log('commit version 45 - edited files for hosting');
 // HEADER
 Header.render('.insert-header');
 
@@ -8,9 +8,119 @@ const buttonLeft = document.getElementById('button-left');
 const buttonRight = document.getElementById('button-right');
 const carouselDiv = document.getElementById('carousel-div');
 const allMenus = document.querySelectorAll('.dropdown');
-
 const gap = 10;
 
+// динамически грузим фотки из папок
+const photoData = {
+  twoPicFolders: [
+    { folder: '1', images: ['1.jpg', '2.jpg'] },
+    { folder: '2', images: ['1.jpg', '2.jpg'] },
+    { folder: '3', images: ['1.jpg', '2.jpg'] },
+    { folder: '4', images: ['1.jpg', '2.jpg'] },
+    { folder: '5', images: ['1.jpg', '2.jpg'] },
+    { folder: '6', images: ['1.jpg', '2.jpg'] },
+    { folder: '7', images: ['1.jpg', '2.jpg'] },
+    { folder: '8', images: ['1.jpg', '2.jpg'] },
+  ],
+
+  singlePhotos: [
+    'Di.jpg',
+    'Diana.jpg',
+    'Eva Pool.jpg',
+    'Eva.jpg',
+    'Natasha.jpg',
+    'Saule 1.jpg',
+    'Saule 2.jpg',
+    'Saule 3.jpg',
+    'Vika.jpg',
+  ],
+};
+
+function createImageElement(src, alt) {
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = alt;
+  img.loading = 'lazy';
+  img.style.opacity = '0';
+  img.style.transition = 'opacity 0.3s ease';
+
+  img.onload = function () {
+    this.style.opacity = '1';
+  };
+
+  img.onerror = function () {
+    console.warn(`Failed to load: ${this.src}`);
+    this.style.display = 'none';
+  };
+
+  return img;
+}
+
+function loadPhotos() {
+  carouselDiv.innerHTML = '';
+
+  const twoPicDivs = [];
+  const onePicDivs = [];
+
+  photoData.twoPicFolders.forEach((folder) => {
+    const div = document.createElement('div');
+    div.className = 'photo-cont two-pics';
+
+    folder.images.forEach((imageName) => {
+      const img = createImageElement(
+        `images/main/${folder.folder}/${imageName}`,
+        imageName
+      );
+      div.appendChild(img);
+    });
+
+    twoPicDivs.push(div);
+  });
+
+  photoData.singlePhotos.forEach((photoName) => {
+    const div = document.createElement('div');
+    div.className = 'photo-cont one-pic';
+
+    const img = createImageElement(`images/main/${photoName}`, photoName);
+    div.appendChild(img);
+
+    onePicDivs.push(div);
+  });
+
+  const maxLength = Math.max(twoPicDivs.length, onePicDivs.length);
+  let twoPicIndex = 0;
+  let onePicIndex = 0;
+
+  for (let i = 0; i < maxLength * 2; i++) {
+    if (i % 2 === 0) {
+      if (twoPicIndex < twoPicDivs.length) {
+        carouselDiv.appendChild(twoPicDivs[twoPicIndex]);
+        twoPicIndex++;
+      }
+    } else {
+      if (onePicIndex < onePicDivs.length) {
+        carouselDiv.appendChild(onePicDivs[onePicIndex]);
+        onePicIndex++;
+      }
+    }
+  }
+
+  while (twoPicIndex < twoPicDivs.length) {
+    carouselDiv.appendChild(twoPicDivs[twoPicIndex]);
+    twoPicIndex++;
+  }
+  while (onePicIndex < onePicDivs.length) {
+    carouselDiv.appendChild(onePicDivs[onePicIndex]);
+    onePicIndex++;
+  }
+
+  console.log('Photos loaded successfully');
+  setTimeout(setupInfiniteCarousel, 100);
+}
+
+document.addEventListener('DOMContentLoaded', loadPhotos);
+
+// CAROUSEL
 if (buttonLeft && buttonRight) {
   function setupInfiniteCarousel() {
     const photoContainers = carouselDiv.querySelectorAll('.photo-cont');
@@ -32,6 +142,8 @@ if (buttonLeft && buttonRight) {
     carouselDiv.scrollLeft = scrollDistance;
   }
 
+  // загружаем после загрузки фоток
+  // setTimeout(setupInfiniteCarousel, 50);
   setupInfiniteCarousel();
 
   function handleInfiniteScroll() {

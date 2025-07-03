@@ -12,34 +12,52 @@ function imageExists(url) {
   });
 }
 
-async function scanProjectImages(projectId, maxImages = 5) {
-  const foundImages = [];
-
-  const namingPatterns = [
-    (i) => `${i}.jpg`, // 1.jpg, 2.jpg, etc.
-    (i) => `${i}.jpeg`, // 1.jpeg, 2.jpeg, etc.
-    (i) => `${i}.png`, // 1.png, 2.png, etc.
-    (i) => `image${i}.jpg`, // image1.jpg, image2.jpg, etc.
-  ];
-
-  for (const pattern of namingPatterns) {
-    for (let i = 1; i <= maxImages; i++) {
-      const filename = pattern(i);
-      const imagePath = `${basePicPath}${projectId}/${filename}`;
-
-      console.log('imagePath', imagePath);
-
-      const exists = await imageExists(imagePath);
-
-      if (exists) {
-        foundImages.push(imagePath);
-      }
-    }
+async function scanProjectImages(projectId) {
+  const manifestUrl = `${basePicPath}${projectId}/manifest.json`;
+  try {
+    const response = await fetch(manifestUrl);
+    if (!response.ok) throw new Error('Manifest not found');
+    const imageFiles = await response.json();
+    // Build full URLs
+    const images = imageFiles.map(
+      (filename) => `${basePicPath}${projectId}/${filename}`
+    );
+    return images;
+  } catch (e) {
+    // Fallback: return empty or use your old guessing method if you want
+    console.warn('Manifest not found, falling back to empty image list', e);
+    return [];
   }
-
-  const uniqueImages = [...new Set(foundImages)].sort();
-  return uniqueImages;
 }
+
+// async function scanProjectImages(projectId, maxImages = 5) {
+//   const foundImages = [];
+
+//   const namingPatterns = [
+//     (i) => `${i}.jpg`, // 1.jpg, 2.jpg, etc.
+//     (i) => `${i}.jpeg`, // 1.jpeg, 2.jpeg, etc.
+//     (i) => `${i}.png`, // 1.png, 2.png, etc.
+//     (i) => `image${i}.jpg`, // image1.jpg, image2.jpg, etc.
+//   ];
+
+//   for (const pattern of namingPatterns) {
+//     for (let i = 1; i <= maxImages; i++) {
+//       const filename = pattern(i);
+//       const imagePath = `${basePicPath}${projectId}/${filename}`;
+
+//       console.log('imagePath', imagePath);
+
+//       const exists = await imageExists(imagePath);
+
+//       if (exists) {
+//         foundImages.push(imagePath);
+//       }
+//     }
+//   }
+
+//   const uniqueImages = [...new Set(foundImages)].sort();
+//   return uniqueImages;
+// }
 
 // PHOTO CAROUSEL
 let photos = [];
@@ -259,13 +277,13 @@ class FilmCard {
 // Данные фото с уникальными ID
 const film_data = [
   {
-    id: 'film_1',
-    url: 'example4.jpg',
-    short_name: 'Saint Laurent',
-    short_description: 'pre fall 2024',
-    name: 'Saint Laurent Collection',
+    id: 'film_1', // айди проекта - название проекта в папке images/projects
+    url: 'example4.jpg', // фото которое будет видно в списке фото
+    short_name: 'MAYOT', // подпись к фото при наведении
+    short_description: 'Сможем ли мы', // подпись к фото при наведении
+    name: 'Сможем ли мы', // подпись к фото при наведении
     description:
-      'Detailed description of Saint Laurent pre fall 2024 collection',
+      'Detailed description of Saint Laurent pre fall 2024 collection', // описание к фото
   },
 
   {

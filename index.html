@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="img-src 'self' data: https:;"
+    />
     <link
       rel="preload"
       href="https://fonts.gstatic.com/s/archivo/v18/k3kCo_SYI-uM91cQDelH8UkWrw.woff2"
@@ -45,30 +49,7 @@
     <section class="photo-section">
       <div class="scroll-circle" id="button-left"></div>
       <div id="carousel-div" class="carousel">
-        <div id="photo-cont" class="photo-cont two-pics">
-          <img src="images/main/example1.jpg" alt="example1.jpg" />
-          <img src="images/main/example2.jpg" alt="example2.jpg" />
-        </div>
-        <div id="photo-cont" class="photo-cont two-pics">
-          <img src="images/main/example3.jpg" alt="example3.jpg" />
-          <img src="images/main/example2.jpg" alt="example2.jpg" />
-        </div>
-        <div id="photo-cont" class="photo-cont one-pic">
-          <img src="images/main/example4.jpg" alt="example3.jpg" />
-        </div>
-        <div id="photo-cont" class="photo-cont one-pic">
-          <img src="images/main/example5.jpg" alt="example3.jpg" />
-        </div>
-        <div id="photo-cont" class="photo-cont two-pics">
-          <img src="images/main/example3.jpg" alt="example3.jpg" />
-          <img src="images/main/example2.jpg" alt="woman.jpg" />
-        </div>
-        <div id="photo-cont" class="photo-cont one-pic">
-          <img src="images/main/example4.jpg" alt="example3.jpg" />
-        </div>
-        <div id="photo-cont" class="photo-cont one-pic">
-          <img src="images/main/example5.jpg" alt="example3.jpg" />
-        </div>
+        <!-- mapped it here -->
       </div>
       <div class="scroll-circle" id="button-right"></div>
     </section>
