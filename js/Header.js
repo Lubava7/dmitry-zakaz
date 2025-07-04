@@ -1,28 +1,29 @@
 const template = document.createElement('template');
 
-const isInSubdir = window.location.pathname.includes('/pages/');
-const basePath = isInSubdir ? '../pages/' : 'pages/';
+const isInSubdir = window.location.pathname.includes('/');
+const basePath = isInSubdir ? '../../' : '../';
 
 let html = `
+   <div class="main_heading">
+    <a id="heading" href="../portfolio">DIMA ZIMNICKIY</a>
 <nav class="header">
-
 <div class="dropdown">
-  <a href="../index.html" class="a">portfolio</a>
+  <a href="${basePath}portfolio/" class="a">portfolio</a>
 </div>
 
 <div class="dropdown">
-  <a href="${basePath}films.html" class="a">projects</a>
+  <a href="${basePath}films/" class="a">projects</a>
 </div>
 
 <div class="dropdown">
-  <a href="${basePath}videos.html" class="a">videos</a>
+  <a href="${basePath}videos/" class="a">videos</a>
 </div>
 
 <div class="dropdown">
-  <a href="${basePath}about.html" class="a">about me</a>
+  <a href="${basePath}about/" class="a">about me</a>
 </div>
-
 </nav>
+   </div>
   `;
 
 html = html.trim();

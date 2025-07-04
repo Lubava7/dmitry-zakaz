@@ -18,13 +18,11 @@ async function scanProjectImages(projectId) {
     const response = await fetch(manifestUrl);
     if (!response.ok) throw new Error('Manifest not found');
     const imageFiles = await response.json();
-    // Build full URLs
     const images = imageFiles.map(
       (filename) => `${basePicPath}${projectId}/${filename}`
     );
     return images;
   } catch (e) {
-    // Fallback: return empty or use your old guessing method if you want
     console.warn('Manifest not found, falling back to empty image list', e);
     return [];
   }
@@ -229,7 +227,7 @@ class FilmCard {
       id: this.id,
     });
 
-    window.location.href = `film.html?${params.toString()}`;
+    window.location.href = `../film/?${params.toString()}`;
   }
 
   render() {

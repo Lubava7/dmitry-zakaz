@@ -39,13 +39,14 @@
     <script defer src="../js/films.js"></script>
     <script defer src="../js/script.js"></script>
 
-    <a id="heading" href="../index.html">DIMA ZIMNICKIY</a>
     <!-- здесь header -->
     <div class="insert-header"></div>
 
     <div id="single_film_container">
       <div class="carusel-wrapper">
-        <div class="arrow prev" onclick="changePhoto(-1)"></div>
+        <div class="film_arrow_wrapper">
+          <div class="arrow prev" onclick="changePhoto(-1)"></div>
+        </div>
         <div class="carousel-container">
           <div class="main-photo">
             <div id="main-photos-container"></div>
@@ -55,7 +56,9 @@
             <div class="thumbnails" id="thumbnails"></div>
           </div>
         </div>
-        <div class="arrow next" onclick="changePhoto(1)"></div>
+        <div class="film_arrow_wrapper">
+          <div class="arrow next" onclick="changePhoto(1)"></div>
+        </div>
       </div>
     </div>
   </body>

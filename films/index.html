@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
@@ -28,30 +27,22 @@
       href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
     />
-
-    <link rel="preload" href="js/videos.js" as="script" />
-
-    <link rel="stylesheet" href="styles/style.css" />
-    <link rel="stylesheet" href="styles/modal.css" />
-    <title>Dmitry</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/modal.css" />
+    <title>films</title>
   </head>
   <body>
-    <script defer src="js/Header.js"></script>
-    <script defer src="js/modal.js"></script>
-    <script defer src="js/videos.js"></script>
-    <script defer src="js/films.js"></script>
-    <script defer src="js/script.js"></script>
+    <script defer src="../js/Header.js"></script>
+    <script defer src="../js/films.js"></script>
+    <script defer src="../js/script.js"></script>
 
     <!-- здесь header -->
     <div class="insert-header"></div>
 
-    <section class="photo-section">
-      <div class="scroll-circle" id="button-left"></div>
+    <p class="article_heading">films</p>
 
-      <div id="carousel-div" class="carousel">
-        <!-- mapped it here -->
-      </div>
-      <div class="scroll-circle" id="button-right"></div>
-    </section>
+    <div id="films_wrapper">
+      <!-- тут грид с фото -->
+    </div>
   </body>
 </html>

@@ -64,7 +64,7 @@ class VideoCard {
       ...(this.video_type === 'vimeo' && { hash: this.hash }),
     });
 
-    window.location.href = `video.html?${params.toString()}`;
+    window.location.href = `../video/?${params.toString()}`;
   }
   render() {
     const container = document.getElementById('videos_wrapper');

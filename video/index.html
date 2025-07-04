@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="preload"
@@ -18,11 +17,6 @@
       type="font/woff2"
       crossorigin
     />
-
-    <link rel="preload" href="../js/Header.js" as="script" />
-    <link rel="preload" href="../js/videos.js" as="script" />
-    <link rel="preload" href="../js/script.js" as="script" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -32,7 +26,6 @@
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/videos.css" />
     <link rel="stylesheet" href="../styles/modal.css" />
-
     <title>video</title>
   </head>
   <body>
@@ -40,14 +33,9 @@
     <script defer src="../js/videos.js"></script>
     <script defer src="../js/script.js"></script>
 
-    <a id="heading" href="../index.html">DIMA ZIMNICKIY</a>
     <!-- здесь header -->
     <div class="insert-header"></div>
 
-    <p class="article_heading">videos</p>
-
-    <div id="videos_wrapper">
-      <!-- тут грид с видео -->
-    </div>
+    <div id="single_video_container"></div>
   </body>
 </html>

@@ -1,4 +1,4 @@
-console.log('commit version 46 - edited files for hosting');
+console.log('commit version 47 - edited pages and added "pretty url"');
 // HEADER
 Header.render('.insert-header');
 
@@ -60,7 +60,7 @@ function loadPhotos() {
       div.className = 'photo-cont two-pics';
       item.images.forEach((imageName) => {
         const img = createImageElement(
-          `images/main/${item.folder}/${imageName}`,
+          `../images/main/${item.folder}/${imageName}`,
           imageName
         );
         div.appendChild(img);
@@ -69,7 +69,10 @@ function loadPhotos() {
     } else if (item.type === 'single') {
       const div = document.createElement('div');
       div.className = 'photo-cont one-pic';
-      const img = createImageElement(`images/main/${item.image}`, item.image);
+      const img = createImageElement(
+        `../images/main/${item.image}`,
+        item.image
+      );
       div.appendChild(img);
       carouselDiv.appendChild(div);
     }
