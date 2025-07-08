@@ -77,8 +77,24 @@
   align-items: flex-start;
 }
 
+.video_title {
+  margin: 0 0 2rem 0 !important;
+}
 .video_title strong {
   font-size: calc((2.2 - 1) * 1.2vw + 1rem);
+}
+
+.video_description {
+  color: hsla(0, 0%, 0%, 1);
+  margin: 1rem 0;
+}
+
+.video_description strong {
+  color: hsla(0, 0%, 0%, 1);
+  font-size: 1rem !important;
+  line-height: 0 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
 }
 
 @media screen and (max-width: 655px) {
