@@ -1,4 +1,4 @@
-console.log('commit version 47 - edited pages and added "pretty url"');
+console.log('commit version 50 - edited videos and added gifs');
 // HEADER
 Header.render('.insert-header');
 

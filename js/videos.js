@@ -10,7 +10,8 @@ class VideoCard {
     short_description,
     name,
     description,
-    video_type
+    video_type,
+    preview_gif = null
   ) {
     this.el = document.createElement('div'); //контейнер для данных карточки - корневой дом элемент
     this.el.setAttribute('id', 'video'); //присваиваем id контейнеру
@@ -24,37 +25,57 @@ class VideoCard {
     this.name = name;
     this.description = description;
     this.video_type = video_type;
+    this.preview_gif = preview_gif;
 
-    this.el.innerHTML = this.generateIframe();
+    this.el.innerHTML = this.generatePreview();
 
     this.render();
   }
-  generateIframe() {
-    let iframeSrc = '';
 
-    if (this.video_type === 'vimeo') {
-      iframeSrc = `https://player.vimeo.com/video/${this.id}?h=${this.hash}&responsive=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&autopause=0`;
-      // thumbnailUrl = `https://vumbnail.com/${this.id}.jpg`;
-    } else if (this.video_type === 'youtube') {
-      iframeSrc = `https://www.youtube.com/embed/${this.id}?enablejsapi=1&iv_load_policy=3&autoplay=1&loop=1&mute=1&controls=0&fs=0&disablekb=1&rel=0&showinfo=0&playlist=${this.id}`;
-      // thumbnailUrl = `https://img.youtube.com/vi/${this.id}/maxresdefault.jpg`;
-    }
-
-    return `
-      <iframe
-        src="${iframeSrc}"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-        loading="lazy"
-       
-      >
-      </iframe>
-      <div class="layout">
-        <h1>${this.short_name}</h1>
-        <h1>&#8212;</h1>
-        <p>${this.short_description}</p>
+  generatePreview() {
+    if (this.preview_gif) {
+      return `
+      <div class="video_preview_container">
+        <img 
+          src="${this.preview_gif}" 
+          alt="${this.name} preview"
+          class="video_preview_gif"
+          loading="lazy"
+        />
       </div>
+      <div class="layout">
+          <h1>${this.short_name}</h1>
+          <h1>&#8212;</h1>
+          <p>${this.short_description}</p>
+        </div>
     `;
+    } else {
+      let iframeSrc = '';
+
+      if (this.video_type === 'vimeo') {
+        iframeSrc = `https://player.vimeo.com/video/${this.id}?h=${this.hash}&responsive=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&autopause=0`;
+        // thumbnailUrl = `https://vumbnail.com/${this.id}.jpg`;
+      } else if (this.video_type === 'youtube') {
+        iframeSrc = `https://www.youtube.com/embed/${this.id}?enablejsapi=1&iv_load_policy=3&autoplay=1&loop=1&mute=1&controls=0&fs=0&disablekb=1&rel=0&showinfo=0&playlist=${this.id}`;
+        // thumbnailUrl = `https://img.youtube.com/vi/${this.id}/maxresdefault.jpg`;
+      }
+
+      return `
+        <iframe
+          src="${iframeSrc}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+          loading="lazy"
+  
+        >
+        </iframe>
+        <div class="layout">
+          <h1>${this.short_name}</h1>
+          <h1>&#8212;</h1>
+          <p>${this.short_description}</p>
+        </div>
+      `;
+    }
   }
 
   navToSinglePage() {
@@ -108,6 +129,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
+    preview_gif: '../images/gifs_preview/giphy.gif',
   },
   {
     id: 'XIrwItlrUaU',
@@ -122,6 +144,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
+    preview_gif: '../images/gifs_preview/giphy.gif',
   },
   {
     id: 'm2lt5PmQgUw',
@@ -139,6 +162,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
+    preview_gif: '../images/gifs_preview/giphy.gif',
   },
   {
     id: 'OpmRuqGNyv0',
@@ -156,6 +180,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
+    preview_gif: '../images/gifs_preview/giphy.gif',
   },
   {
     id: 'xTj3X7cc6GA',
@@ -172,6 +197,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
+    preview_gif: '../images/gifs_preview/giphy.gif',
   },
 ];
 
@@ -185,7 +211,8 @@ function createAllVideoCards() {
       video.short_description,
       video.name,
       video.description,
-      video.video_type
+      video.video_type,
+      video.preview_gif
     );
   });
 }

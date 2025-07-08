@@ -57,6 +57,10 @@ body {
 
 .main_heading {
   margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #heading {
@@ -70,6 +74,7 @@ body {
 
 .header {
   margin: 1rem 0;
+  width: 100%;
 }
 
 /* NAV MENU */

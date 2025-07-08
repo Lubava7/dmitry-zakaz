@@ -246,23 +246,43 @@ class FilmCard {
 // Данные фото с уникальными ID
 const film_data = [
   {
-    id: 'film_1', // айди проекта - название проекта в папке images/projects
-    url: 'projects/film_1/1.jpg', // фото которое будет видно в списке фото
-    short_name: 'MAYOT', // подпись к фото при наведении
-    short_description: 'Сможем ли мы', // подпись к фото при наведении
-    name: 'Сможем ли мы', // подпись к фото при наведении
-    description:
-      'Detailed description of Saint Laurent pre fall 2024 collection', // описание к фото
+    id: 'high', // айди проекта - название проекта в папке images/projects
+    url: 'projects/high/99.jpg', // фото которое будет видно в списке фото
+    short_name: 'MAYOT - High', // подпись к фото при наведении
+    short_description: 'Fontanka Visual 2024', // подпись к фото при наведении
+    name: 'Fontanka Visual 2024', // подпись к фото при наведении
   },
 
   {
-    id: 'film_1', // айди проекта - название проекта в папке images/projects
-    url: 'projects/film_1/1.jpg', // фото которое будет видно в списке фото
-    short_name: 'MAYOT', // подпись к фото при наведении
-    short_description: 'Сможем ли мы', // подпись к фото при наведении
-    name: 'Сможем ли мы', // подпись к фото при наведении
-    description:
-      'Detailed description of Saint Laurent pre fall 2024 collection', // описание к фото
+    id: 'done',
+    url: 'projects/done/1.jpg',
+    short_name: 'UNEEK - DONE',
+    short_description: 'Rolling Loud 2024',
+    name: 'Rolling Loud 2024',
+  },
+
+  {
+    id: 'PAKET',
+    url: 'projects/PAKET/cover.jpg',
+    short_name: 'PAKET NETWORK',
+    short_description: 'SS24',
+    name: 'SS24',
+  },
+
+  {
+    id: 'smozhem',
+    url: 'projects/smozhem/1.jpg',
+    short_name: 'MAYOT – Сможем ли Мы',
+    short_description: 'August 2023',
+    name: 'August 2023',
+  },
+
+  {
+    id: 'Moscow',
+    url: 'projects/Moscow/1.jpg',
+    short_name: 'MOSCOW STREETS',
+    short_description: '2022',
+    name: '2022',
   },
 ];
 
@@ -341,7 +361,6 @@ async function displayFilm(filmData) {
       loadingDiv.parentNode.removeChild(loadingDiv);
     }
 
-    // Ensure modal listeners are added after images are loaded
     if (window.imageViewer) {
       setTimeout(() => {
         window.imageViewer.refreshImageListeners();
