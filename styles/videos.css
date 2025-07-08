@@ -45,7 +45,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
   width: 100%;
   padding: 0 0 0 5px;
@@ -79,14 +79,12 @@
 
 .video_title {
   margin: 0 0 2rem 0 !important;
-}
-.video_title strong {
   font-size: calc((2.2 - 1) * 1.2vw + 1rem);
+  line-height: normal;
 }
-
 .video_description {
   color: hsla(0, 0%, 0%, 1);
-  margin: 1rem 0;
+  margin: 0;
 }
 
 .video_description strong {
