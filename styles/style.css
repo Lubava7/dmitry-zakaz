@@ -388,6 +388,12 @@ span {
 }
 
 @media screen and (max-width: 730px) {
+  .main_heading {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(white 90%, transparent 100%);
+  }
   .content {
     padding: 0 25px;
     display: flex;
