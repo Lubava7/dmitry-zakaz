@@ -84,72 +84,112 @@ function loadPhotos() {
 document.addEventListener('DOMContentLoaded', loadPhotos);
 
 // CAROUSEL
+
 if (buttonLeft && buttonRight) {
   function setupInfiniteCarousel() {
     const photoContainers = carouselDiv.querySelectorAll('.photo-cont');
 
     if (photoContainers.length === 0) return;
 
-    const firstClone = photoContainers[0].cloneNode(true);
-    const lastClone =
-      photoContainers[photoContainers.length - 1].cloneNode(true);
+    const originalPhotos = Array.from(photoContainers);
 
-    firstClone.classList.add('clone');
-    lastClone.classList.add('clone');
-
-    carouselDiv.appendChild(firstClone);
-    carouselDiv.insertBefore(lastClone, photoContainers[0]);
+    originalPhotos.forEach((photo) => {
+      const cloneBefore = photo.cloneNode(true);
+      const cloneAfter = photo.cloneNode(true);
+      cloneBefore.classList.add('clone');
+      cloneAfter.classList.add('clone');
+      carouselDiv.insertBefore(cloneBefore, carouselDiv.firstChild);
+      carouselDiv.appendChild(cloneAfter);
+    });
 
     const photoWidth = carouselDiv.offsetWidth * 0.5;
     const scrollDistance = (photoWidth + gap) * 2;
-    carouselDiv.scrollLeft = scrollDistance;
+    carouselDiv.scrollLeft = scrollDistance * originalPhotos.length;
   }
 
-  // загружаем после загрузки фоток
-  // setTimeout(setupInfiniteCarousel, 50);
   setupInfiniteCarousel();
+
+  function snapToNearestPhoto(direction) {
+    const photoContainers = carouselDiv.querySelectorAll('.photo-cont');
+    const carouselRect = carouselDiv.getBoundingClientRect();
+    const carouselCenter = carouselRect.left + carouselRect.width / 2;
+
+    let targetContainer = null;
+    let minDistance = Infinity;
+
+    photoContainers.forEach((container) => {
+      const containerRect = container.getBoundingClientRect();
+      const containerCenter = containerRect.left + containerRect.width / 2;
+      const distance = Math.abs(containerCenter - carouselCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        targetContainer = container;
+      }
+    });
+
+    if (!targetContainer) return;
+
+    let targetPhoto = null;
+
+    if (direction === 'right') {
+      targetPhoto = targetContainer.nextElementSibling;
+      if (!targetPhoto) {
+        targetPhoto = carouselDiv.firstElementChild;
+      }
+    } else {
+      targetPhoto = targetContainer.previousElementSibling;
+      if (!targetPhoto) {
+        targetPhoto = carouselDiv.lastElementChild;
+      }
+    }
+
+    if (!targetPhoto) return;
+
+    const targetRect = targetPhoto.getBoundingClientRect();
+    const carouselScrollLeft = carouselDiv.scrollLeft;
+
+    const targetScrollLeft =
+      carouselScrollLeft +
+      (targetRect.left - carouselRect.left) +
+      targetRect.width / 2 -
+      carouselRect.width / 2;
+
+    carouselDiv.style.scrollBehavior = 'smooth';
+    carouselDiv.scrollLeft = targetScrollLeft;
+  }
 
   function handleInfiniteScroll() {
     const photoWidth = carouselDiv.offsetWidth * 0.5;
     const scrollDistance = (photoWidth + gap) * 2;
+    const originalPhotoCount = photoOrder.length;
+    const totalScrollDistance = scrollDistance * originalPhotoCount;
     const maxScrollLeft = carouselDiv.scrollWidth - carouselDiv.clientWidth;
 
-    if (carouselDiv.scrollLeft >= maxScrollLeft - 5) {
-      carouselDiv.style.scrollBehavior = 'auto';
-      carouselDiv.scrollLeft = scrollDistance;
-      setTimeout(() => {
-        carouselDiv.style.scrollBehavior = 'smooth';
-      }, 10);
+    carouselDiv.style.scrollBehavior = 'auto';
+
+    if (carouselDiv.scrollLeft >= maxScrollLeft - totalScrollDistance) {
+      carouselDiv.scrollLeft = carouselDiv.scrollLeft - totalScrollDistance;
     }
 
-    if (carouselDiv.scrollLeft <= 5) {
-      carouselDiv.style.scrollBehavior = 'auto';
-      carouselDiv.scrollLeft = maxScrollLeft - scrollDistance;
-      setTimeout(() => {
-        carouselDiv.style.scrollBehavior = 'smooth';
-      }, 10);
+    if (carouselDiv.scrollLeft <= totalScrollDistance) {
+      carouselDiv.scrollLeft = carouselDiv.scrollLeft + totalScrollDistance;
     }
   }
 
   let scrollTimeout;
   carouselDiv.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(handleInfiniteScroll, 100);
+    scrollTimeout = setTimeout(handleInfiniteScroll, 50);
   });
 
   buttonRight.addEventListener('click', function (e) {
-    const photoWidth = carouselDiv.offsetWidth * 0.5;
-    const scrollDistance = (photoWidth + gap) * 2;
-
-    carouselDiv.style.scrollBehavior = 'smooth';
-    carouselDiv.scrollLeft += scrollDistance;
+    e.preventDefault();
+    snapToNearestPhoto('right');
   });
 
   buttonLeft.addEventListener('click', function (e) {
-    const photoWidth = carouselDiv.offsetWidth * 0.5;
-    const scrollDistance = (photoWidth + gap) * 2;
-
-    carouselDiv.style.scrollBehavior = 'smooth';
-    carouselDiv.scrollLeft -= scrollDistance;
+    e.preventDefault();
+    snapToNearestPhoto('left');
   });
 }

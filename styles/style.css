@@ -368,7 +368,8 @@ span {
 
 @media screen and (min-width: 1200px) {
   .photo-section .carousel {
-    width: 70%;
+    /* width: 70%; */
+    width: 80vw;
   }
 }
 
