@@ -36,12 +36,9 @@ class VideoCard {
     if (this.preview_gif) {
       return `
       <div class="video_preview_container">
-        <img 
-          src="${this.preview_gif}" 
-          alt="${this.name} preview"
-          class="video_preview_gif"
-          loading="lazy"
-        />
+           <video autoplay muted loop playsinline class="video_preview_gif">
+          <source src="${this.preview_gif}" type="video/mp4" />
+        </video>
       </div>
       <div class="layout">
           <h1>${this.short_name}</h1>
