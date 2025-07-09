@@ -2,7 +2,7 @@ console.log('commit version 55 - edited mobile header');
 
 // HEADER
 Header.render('.insert-header');
-Modal.render();
+// Modal.render();
 
 const buttonLeft = document.getElementById('button-left');
 const buttonRight = document.getElementById('button-right');
@@ -56,6 +56,13 @@ function createImageElement(src, alt) {
   return img;
 }
 
+function waitForImageViewerAndRefreshListeners(retries = 10) {
+  if (!window.imageViewer) return;
+  if (window.imageViewer) {
+    window.imageViewer.refreshImageListeners();
+  }
+}
+
 function loadPhotos() {
   carouselDiv.innerHTML = '';
   photoOrder.forEach((item) => {
@@ -83,7 +90,12 @@ function loadPhotos() {
   });
   console.log('Photos loaded successfully');
 
-  setTimeout(setupInfiniteCarousel, 100);
+  // setTimeout(setupInfiniteCarousel, 100);
+
+  setTimeout(() => {
+    setupInfiniteCarousel();
+    waitForImageViewerAndRefreshListeners();
+  }, 100);
 }
 
 document.addEventListener('DOMContentLoaded', loadPhotos);

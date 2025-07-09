@@ -93,6 +93,22 @@ class ImageModalViewer {
   }
 
   addImageListeners() {
+    // const images = document.querySelectorAll('img');
+    // images.forEach((img) => {
+    //   if (!img.hasAttribute('data-modal-listener')) {
+    //     img.addEventListener('click', (e) => {
+    //       e.preventDefault();
+    //       e.stopPropagation();
+    //       this.openModal(e);
+    //     });
+    //     img.setAttribute('data-modal-listener', 'true');
+    //     img.style.cursor = 'pointer';
+    //   }
+    // });
+    document.querySelectorAll('img[data-modal-listener]').forEach((img) => {
+      img.removeAttribute('data-modal-listener');
+    });
+
     const images = document.querySelectorAll('img');
     images.forEach((img) => {
       if (!img.hasAttribute('data-modal-listener')) {
