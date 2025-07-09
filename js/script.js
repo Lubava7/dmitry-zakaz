@@ -1,7 +1,7 @@
 console.log('commit version 55 - edited mobile header');
+
 // HEADER
 Header.render('.insert-header');
-
 Modal.render();
 
 const buttonLeft = document.getElementById('button-left');
@@ -82,6 +82,7 @@ function loadPhotos() {
     }
   });
   console.log('Photos loaded successfully');
+
   setTimeout(setupInfiniteCarousel, 100);
 }
 

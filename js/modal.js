@@ -146,7 +146,6 @@ class ImageModalViewer {
       this.updateNavButtons();
       this.updateImageCounter();
 
-      // Update carousel if we're on film page
       this.syncWithCarousel();
     }
   }
@@ -162,17 +161,14 @@ class ImageModalViewer {
       this.updateNavButtons();
       this.updateImageCounter();
 
-      // Update carousel if we're on film page
       this.syncWithCarousel();
     }
   }
 
   syncWithCarousel() {
-    // Check if we're on a page with carousel functions
     if (typeof goToPhoto === 'function' && typeof photos !== 'undefined') {
       const currentImageSrc = this.images[this.currentImageIndex].src;
       const carouselIndex = photos.findIndex((photo) => {
-        // Handle relative path differences
         const photoPath = photo.replace('../', '');
         const imagePath = currentImageSrc.split('/').slice(-2).join('/');
         return photoPath.includes(imagePath) || imagePath.includes(photoPath);
@@ -353,7 +349,6 @@ class ImageModalViewer {
   }
 }
 
-// Initialize modal on appropriate screen sizes
 let modalInitialized = false;
 
 function checkScreenSize() {
