@@ -124,22 +124,22 @@ function updateThumbnailsPosition(index) {
     return;
   }
 
-  const thumbnailWidth = 90;
-  let offset = 0;
+  // const thumbnailWidth = 90;
+  // let offset = 0;
 
-  if (index >= Math.floor(visibleThumbnails / 2)) {
-    offset = (index - Math.floor(visibleThumbnails / 2)) * thumbnailWidth;
+  // if (index >= Math.floor(visibleThumbnails / 2)) {
+  //   offset = (index - Math.floor(visibleThumbnails / 2)) * thumbnailWidth;
 
-    const maxOffset = Math.max(
-      0,
-      (totalPhotos - visibleThumbnails) * thumbnailWidth
-    );
-    if (offset > maxOffset) {
-      offset = maxOffset;
-    }
-  }
+  //   const maxOffset = Math.max(
+  //     0,
+  //     (totalPhotos - visibleThumbnails) * thumbnailWidth
+  //   );
+  //   if (offset > maxOffset) {
+  //     offset = maxOffset;
+  //   }
+  // }
 
-  thumbnailsContainer.style.transform = `translateX(-${offset}px)`;
+  // thumbnailsContainer.style.transform = `translateX(-${offset}px)`;
 }
 
 function changePhoto(direction) {
