@@ -1,4 +1,4 @@
-console.log('commit version 50 - edited videos and added gifs');
+console.log('commit version 55 - edited mobile header');
 // HEADER
 Header.render('.insert-header');
 

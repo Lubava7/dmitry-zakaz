@@ -5,7 +5,14 @@ const basePath = isInSubdir ? '../../' : '../';
 
 let html = `
    <div class="main_heading" id="mainHeading">
+
+     <div class="mobile-header">
     <a id="heading" href="../portfolio">DIMA ZIMNICKIY</a>
+              <div class="burger-menu" id="burgerMenu">
+                  <span></span>
+                  <span></span>
+              </div>
+          </div>
 
      <!-- Desktop navigation -->
     <nav class="header">
@@ -30,19 +37,12 @@ let html = `
 
       <!-- Mobile burger menu -->
         <div>
-          <div class="mobile-header">
-              <div class="burger-menu" id="burgerMenu">
-                  <span></span>
-                  <span></span>
-              </div>
-          </div>
-        </div>
+        
                
         <div class="overlay" id="overlay"></div>
                
         <div class="mobile-menu" id="mobileMenu">
                    <div class="mobile-menu-content">
-        <a id="heading" href="../portfolio">DIMA ZIMNICKIY</a>
                        <a href="${basePath}portfolio/">portfolio</a>
                        <a href="${basePath}films/">projects</a>
                        <a href="${basePath}videos/">videos</a>
@@ -50,7 +50,7 @@ let html = `
                    </div>
                </div>
              </div>
-       </div>
+      
   `;
 
 html = html.trim();

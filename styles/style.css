@@ -30,6 +30,7 @@ body {
   justify-content: center;
   width: 100%;
   scroll-behavior: smooth;
+  margin-top: 0;
 }
 
 .a {
@@ -56,18 +57,20 @@ body {
 /* MAIN HEADING WITH NAME */
 
 .main_heading {
-  /* margin-top: 25px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 9999 !important;
+  z-index: 10000 !important;
   transition: all 0.3s ease-in-out;
+  background: white;
+  margin-top: 25px;
 }
 
 .main_heading.active {
-  z-index: 9999 !important;
+  z-index: 10000 !important;
   transition: all 0.3s ease-in-out;
+  background: white;
 }
 
 #heading {
@@ -77,6 +80,7 @@ body {
   font-size: calc((2 - 1) * 1.2vw + 1rem);
   font-family: 'Archivo Black', sans-serif;
   font-weight: 400;
+  z-index: 10000 !important;
 }
 
 .header {
@@ -296,6 +300,7 @@ span {
 }
 
 /* Mobile burger menu */
+
 .burger-menu {
   display: none;
   flex-direction: column;
@@ -334,7 +339,7 @@ span {
 }
 
 .mobile-menu.active {
-  transform: translateY(0);
+  transform: translateY(15%);
   isolation: isolate;
 }
 
@@ -359,8 +364,10 @@ span {
 .mobile-menu-content #heading {
   margin: 0;
 }
-
-.mobile-header {
+.mobile-header .burger-menu {
+  z-index: 10000 !important;
+}
+.mobile-header .burger-menu {
   display: none;
   z-index: 10000 !important;
 }
@@ -419,10 +426,6 @@ span {
 
   .dropdown a {
     line-height: 2.5rem;
-  }
-
-  nav {
-    /* flex-wrap: wrap; */
   }
 }
 @media screen and (max-width: 415px) {
@@ -501,21 +504,27 @@ span {
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
+    margin-top: 0;
   }
 
   .header {
     display: none;
   }
 
-  .mobile-header {
-    display: block;
-  }
-
-  .burger-menu {
-    display: flex;
-  }
-
   #heading {
     margin: 15px 0;
+  }
+  .mobile-header .burger-menu {
+    z-index: 10000 !important;
+    display: flex;
+  }
+  .mobile-header {
+    width: 100%;
+    z-index: 10000 !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
   }
 }
