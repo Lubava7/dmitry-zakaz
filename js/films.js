@@ -28,12 +28,11 @@ async function scanProjectImages(projectId) {
   }
 }
 
-// PHOTO CAROUSEL
 let photos = [];
-
 let currentPhotoIndex = 0;
 let totalPhotos = photos.length;
 const visibleThumbnails = 3;
+let thumbnailOffset = 0;
 
 function initializeCarousel() {
   const mainPhotosContainer = document.getElementById('main-photos-container');
@@ -41,7 +40,14 @@ function initializeCarousel() {
 
   if (mainPhotosContainer) {
     mainPhotosContainer.innerHTML = '';
+    mainPhotosContainer.style.display = 'flex';
+    // mainPhotosContainer.style.gap = '20px';
+    // mainPhotosContainer.style.width = `calc(${photos.length * 100}% + 20px)`;
+    mainPhotosContainer.style.width = `${photos.length * 100}%`;
+    mainPhotosContainer.style.transition = 'transform 0.5s ease-in-out';
+    mainPhotosContainer.style.transform = 'translateX(0%)';
   }
+
   if (thumbnailsContainer) {
     thumbnailsContainer.innerHTML = '';
   }
@@ -49,7 +55,9 @@ function initializeCarousel() {
   photos.forEach((photo, index) => {
     const mainPhotoItem = document.createElement('div');
     mainPhotoItem.className = 'main-photo-item';
-    if (index === 0) mainPhotoItem.classList.add('active');
+    // mainPhotoItem.style.width = `calc((100% / ${photos.length}) - 20px)`;
+    mainPhotoItem.style.width = `calc(100% / ${photos.length})`;
+    mainPhotoItem.style.flexShrink = '0';
 
     const img = document.createElement('img');
     img.src = photo;
@@ -89,11 +97,10 @@ function initializeCarousel() {
 }
 
 function showPhoto(index) {
-  const mainPhotos = document.querySelectorAll('.main-photo-item');
-  mainPhotos.forEach((photo) => photo.classList.remove('active'));
-
-  if (mainPhotos[index]) {
-    mainPhotos[index].classList.add('active');
+  const mainPhotosContainer = document.getElementById('main-photos-container');
+  if (mainPhotosContainer) {
+    const translateValue = -(index * (100 / photos.length));
+    mainPhotosContainer.style.transform = `translateX(${translateValue}%)`;
   }
 
   const thumbnailsContainer = document.getElementById('thumbnails');
@@ -124,22 +131,18 @@ function updateThumbnailsPosition(index) {
     return;
   }
 
-  // const thumbnailWidth = 90;
-  // let offset = 0;
+  const thumbnailWidth = window.innerWidth * 0.06 + window.innerWidth * 0.006;
+  let offset = index * thumbnailWidth;
 
-  // if (index >= Math.floor(visibleThumbnails / 2)) {
-  //   offset = (index - Math.floor(visibleThumbnails / 2)) * thumbnailWidth;
+  if (index >= totalPhotos - visibleThumbnails) {
+    const remaining = totalPhotos - index;
+    const needed = visibleThumbnails - remaining;
+    offset = index * thumbnailWidth;
+  }
 
-  //   const maxOffset = Math.max(
-  //     0,
-  //     (totalPhotos - visibleThumbnails) * thumbnailWidth
-  //   );
-  //   if (offset > maxOffset) {
-  //     offset = maxOffset;
-  //   }
-  // }
-
-  // thumbnailsContainer.style.transform = `translateX(-${offset}px)`;
+  thumbnailOffset = offset;
+  thumbnailsContainer.style.transform = `translateX(-${offset}px)`;
+  thumbnailsContainer.style.transition = 'transform 0.3s ease';
 }
 
 function changePhoto(direction) {
@@ -163,13 +166,43 @@ function updateCarouselPhotos(newPhotos) {
   photos = [...newPhotos];
   totalPhotos = photos.length;
   currentPhotoIndex = 0;
+  thumbnailOffset = 0;
   initializeCarousel();
   showPhoto(0);
+}
+
+function addInfiniteScrollListeners() {
+  const thumbnailsContainer = document.getElementById('thumbnails');
+  if (!thumbnailsContainer) return;
+
+  thumbnailsContainer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const direction = e.deltaY > 0 ? 1 : -1;
+    changePhoto(direction);
+  });
+
+  let touchStartY = 0;
+  thumbnailsContainer.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  });
+
+  thumbnailsContainer.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const touchEndY = e.touches[0].clientY;
+    const deltaY = touchStartY - touchEndY;
+
+    if (Math.abs(deltaY) > 30) {
+      const direction = deltaY > 0 ? 1 : -1;
+      changePhoto(direction);
+      touchStartY = touchEndY;
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   initializeCarousel();
   showPhoto(0);
+  addInfiniteScrollListeners();
 });
 
 function addPhotos(newPhotos) {
@@ -177,6 +210,7 @@ function addPhotos(newPhotos) {
   totalPhotos = photos.length;
   initializeCarousel();
   showPhoto(currentPhotoIndex);
+  addInfiniteScrollListeners();
 }
 
 function removePhoto(index) {
@@ -190,16 +224,16 @@ function removePhoto(index) {
 
     initializeCarousel();
     showPhoto(currentPhotoIndex);
+    addInfiniteScrollListeners();
   }
 }
 
-// PHOTOS + ONE PHOTO
 const films = [];
 
 class FilmCard {
   constructor(id, url, short_name, short_description, name, description) {
-    this.el = document.createElement('div'); //контейнер для данных карточки - корневой дом элемент
-    this.el.setAttribute('id', 'film'); //присваиваем id контейнеру
+    this.el = document.createElement('div');
+    this.el.setAttribute('id', 'film');
     this.el.setAttribute('data-film-id', id);
     this.el.addEventListener('click', this.navToSinglePage.bind(this));
 
@@ -214,7 +248,7 @@ class FilmCard {
             <img src="${this.url}" />
             <div class="layout">
               <h1>${this.short_name}</h1>
-              <h1>&#8212;</h1>
+              <h2>&#8212;</h2>
               <p>${this.short_description}</p>
             </div>
         `;
@@ -243,16 +277,14 @@ class FilmCard {
   }
 }
 
-// Данные фото с уникальными ID
 const film_data = [
   {
-    id: 'high', // айди проекта - название проекта в папке images/projects
-    url: 'projects/high/99.jpg', // фото которое будет видно в списке фото
-    short_name: 'MAYOT - High', // подпись к фото при наведении
-    short_description: 'Fontanka Visual 2024', // подпись к фото при наведении
-    name: 'Fontanka Visual 2024', // подпись к фото при наведении
+    id: 'high',
+    url: 'projects/high/99.jpg',
+    short_name: 'MAYOT - High',
+    short_description: 'Fontana Visual 2024',
+    name: 'Fontanka Visual 2024',
   },
-
   {
     id: 'done',
     url: 'projects/done/1.jpg',
@@ -260,7 +292,6 @@ const film_data = [
     short_description: 'Rolling Loud 2024',
     name: 'Rolling Loud 2024',
   },
-
   {
     id: 'PAKET',
     url: 'projects/PAKET/cover.jpg',
@@ -268,7 +299,6 @@ const film_data = [
     short_description: 'SS24',
     name: 'SS24',
   },
-
   {
     id: 'smozhem',
     url: 'projects/smozhem/1.jpg',
@@ -276,7 +306,6 @@ const film_data = [
     short_description: 'August 2023',
     name: 'August 2023',
   },
-
   {
     id: 'Moscow',
     url: 'projects/Moscow/1.jpg',
@@ -301,7 +330,6 @@ function createAllFilmCards() {
 
 createAllFilmCards();
 
-// ONE FILM PAGE (для film.html)
 function loadSelectedFilm() {
   const urlParams = new URLSearchParams(window.location.search);
   const filmId = urlParams.get('id');
