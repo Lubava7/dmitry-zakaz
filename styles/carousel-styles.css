@@ -141,4 +141,12 @@
     aspect-ratio: auto;
     width: 85vw;
   }
+
+  .main-photo {
+    height: 95vw;
+  }
+
+  .film_arrow_wrapper {
+    height: 95vw;
+  }
 }
