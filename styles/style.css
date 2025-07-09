@@ -300,7 +300,6 @@ span {
 }
 
 /* Mobile burger menu */
-
 .burger-menu {
   display: none;
   flex-direction: column;
@@ -308,22 +307,52 @@ span {
   z-index: 1001;
   position: relative;
   z-index: 10000 !important;
+  width: 28px;
 }
 
 .burger-menu span {
-  width: 25px;
+  /* width: 28px;
   height: 1px;
   background-color: black;
   margin: 3px 0;
-  transition: 0.3s;
+  transition: 0.3s; */
+
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  content: '';
+  width: 100%;
+  height: 1px;
+  transition: transform 250ms cubic-bezier(0.2, 0.6, 0.3, 1),
+    width 250ms cubic-bezier(0.2, 0.6, 0.3, 1);
+  will-change: transform, width;
+  /* margin: 3px 0; */
+  background-color: black;
+}
+
+.burger-menu span:nth-child(1) {
+  margin: 3px 0;
+}
+
+.burger-menu span:nth-child(2) {
+  margin: 3px 0;
 }
 
 .burger-menu.active span:nth-child(1) {
-  transform: rotate(-45deg) translate(0, 6px);
+  /* transform: rotate(-50deg) translate(0, 6px); */
+  transform: translatex(3px) translatey(1px) rotate(-140deg);
+  width: 26px;
+  margin: 0;
 }
 
 .burger-menu.active span:nth-child(2) {
-  transform: rotate(45deg) translate(0px, -6px);
+  /* transform: rotate(50deg) translate(0px, -6px); */
+  transform: translatex(3px) rotate(140deg);
+  width: 26px;
+  margin: 0;
 }
 
 .mobile-menu {
@@ -335,7 +364,6 @@ span {
   z-index: 9999 !important;
   transform: translateY(-100%);
   transition: transform 0.3s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu.active {
@@ -364,6 +392,14 @@ span {
 .mobile-menu-content #heading {
   margin: 0;
 }
+
+.mobile-header {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+}
+
 .mobile-header .burger-menu {
   z-index: 10000 !important;
 }
@@ -496,7 +532,7 @@ span {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   .main_heading {
     flex-direction: row;
     justify-content: space-between;
@@ -505,6 +541,7 @@ span {
     padding: 0 20px;
     box-sizing: border-box;
     margin-top: 0;
+    background: white;
   }
 
   .header {
@@ -522,9 +559,5 @@ span {
     width: 100%;
     z-index: 10000 !important;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
   }
 }

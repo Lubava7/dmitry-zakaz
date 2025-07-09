@@ -73,10 +73,6 @@ class Header {
     const overlay = document.getElementById('overlay');
     const mainHeading = document.getElementById('mainHeading');
 
-    console.log('burgerMenu', burgerMenu);
-    console.log('mobileMenu', mobileMenu);
-    console.log('overlay', overlay);
-
     function toggleMenu() {
       burgerMenu.classList.toggle('active');
       mobileMenu.classList.toggle('active');

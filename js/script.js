@@ -33,7 +33,7 @@ const photoOrder = [
 ];
 
 function isMobile() {
-  return window.innerWidth <= 768;
+  return window.innerWidth <= 800;
 }
 
 function createImageElement(src, alt) {
