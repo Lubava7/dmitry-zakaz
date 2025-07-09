@@ -32,6 +32,10 @@ const photoOrder = [
   { type: 'single', image: 'Vika.jpg' },
 ];
 
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
 function createImageElement(src, alt) {
   const img = document.createElement('img');
   img.src = src;
@@ -93,18 +97,20 @@ if (buttonLeft && buttonRight) {
 
     const originalPhotos = Array.from(photoContainers);
 
-    originalPhotos.forEach((photo) => {
-      const cloneBefore = photo.cloneNode(true);
-      const cloneAfter = photo.cloneNode(true);
-      cloneBefore.classList.add('clone');
-      cloneAfter.classList.add('clone');
-      carouselDiv.insertBefore(cloneBefore, carouselDiv.firstChild);
-      carouselDiv.appendChild(cloneAfter);
-    });
+    if (!isMobile()) {
+      originalPhotos.forEach((photo) => {
+        const cloneBefore = photo.cloneNode(true);
+        const cloneAfter = photo.cloneNode(true);
+        cloneBefore.classList.add('clone');
+        cloneAfter.classList.add('clone');
+        carouselDiv.insertBefore(cloneBefore, carouselDiv.firstChild);
+        carouselDiv.appendChild(cloneAfter);
+      });
 
-    const photoWidth = carouselDiv.offsetWidth * 0.5;
-    const scrollDistance = (photoWidth + gap) * 2;
-    carouselDiv.scrollLeft = scrollDistance * originalPhotos.length;
+      const photoWidth = carouselDiv.offsetWidth * 0.5;
+      const scrollDistance = (photoWidth + gap) * 2;
+      carouselDiv.scrollLeft = scrollDistance * originalPhotos.length;
+    }
   }
 
   setupInfiniteCarousel();
