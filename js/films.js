@@ -248,7 +248,7 @@ class FilmCard {
             <img src="${this.url}" />
             <div class="layout">
               <h1>${this.short_name}</h1>
-              <h2>&#8212;</h2>
+               <h1>&#8212;</h1>
               <p>${this.short_description}</p>
             </div>
         `;
