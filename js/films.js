@@ -9,6 +9,7 @@ function imageExists(url) {
     img.onload = () => resolve(true);
     img.onerror = () => resolve(false);
     img.src = url;
+    img.setAttribute('loading', 'lazy');
   });
 }
 
@@ -66,6 +67,7 @@ function initializeCarousel() {
     img.style.height = '100%';
     img.style.objectFit = 'cover';
     img.style.display = 'block';
+    img.setAttribute('loading', 'lazy');
 
     mainPhotoItem.appendChild(img);
     mainPhotosContainer?.appendChild(mainPhotoItem);
@@ -86,6 +88,7 @@ function initializeCarousel() {
       const thumbImg = new Image();
       thumbImg.src = photo;
       thumbnailsContainer?.appendChild(thumbnail);
+      thumbImg.setAttribute('loading', 'lazy');
     });
   }
 
@@ -245,7 +248,7 @@ class FilmCard {
     this.description = description;
 
     this.el.innerHTML = `
-            <img src="${this.url}" />
+            <img src="${this.url}" loading="lazy"/>
             <div class="layout">
               <h1>${this.short_name}</h1>
                <h1>&#8212;</h1>
@@ -355,15 +358,10 @@ async function displayFilm(filmData) {
 
     try {
       const projectImages = await scanProjectImages(filmData.id);
-      console.log('projectImages', projectImages);
 
       if (projectImages.length > 0) {
-        console.log(`Found ${projectImages.length} images for ${filmData.id}`);
         updateCarouselPhotos(projectImages);
       } else {
-        console.log(
-          `No dynamic images found for ${filmData.id}, using fallback`
-        );
         const fallbackImages = [
           '../images/example4.jpg',
           '../images/example5.jpg',

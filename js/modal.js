@@ -8,7 +8,7 @@ let modalHtml = `
   </span></div>
   
   <div class="modal-content" id="modalContent">
-    <img id="modalImage" class="modal-image" src="" alt="" />
+    <img id="modalImage" class="modal-image" src="" alt="" loading="lazy"/>
     <div class="image-counter" id="imageCounter">1 / 1</div>
   </div>
 

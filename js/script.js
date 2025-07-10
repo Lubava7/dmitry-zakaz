@@ -1,4 +1,4 @@
-console.log('commit version 55 - edited mobile header');
+console.log('commit version 57 - edited film and added lazy loading');
 
 // HEADER
 Header.render('.insert-header');
@@ -43,6 +43,7 @@ function createImageElement(src, alt) {
   // img.loading = 'lazy';
   // img.style.opacity = '0';
   img.style.transition = 'opacity 0.3s ease';
+  img.setAttribute('loading', 'lazy');
 
   img.onload = function () {
     this.style.opacity = '1';
@@ -88,9 +89,6 @@ function loadPhotos() {
       carouselDiv.appendChild(div);
     }
   });
-  console.log('Photos loaded successfully');
-
-  // setTimeout(setupInfiniteCarousel, 100);
 
   setTimeout(() => {
     setupInfiniteCarousel();
@@ -212,3 +210,30 @@ if (buttonLeft && buttonRight) {
     snapToNearestPhoto('left');
   });
 }
+
+const videoObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const video = entry.target;
+      const sources = video.querySelectorAll('source[data-src]');
+      sources.forEach((source) => {
+        console.log('[LazyLoad] Loading video source:', source.dataset.src);
+        source.src = source.dataset.src;
+        source.removeAttribute('data-src');
+      });
+      video.load(); // Start loading the video
+      observer.unobserve(video);
+      console.log('[LazyLoad] Video is now loading:', video);
+    } else {
+      // Not intersecting yet
+      console.log('[LazyLoad] Video not in viewport:', entry.target);
+    }
+  });
+});
+
+document.querySelectorAll('video').forEach((video) => {
+  if (video.querySelector('source[data-src]')) {
+    videoObserver.observe(video);
+    console.log('[LazyLoad] Observing video:', video);
+  }
+});

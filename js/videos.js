@@ -37,7 +37,7 @@ class VideoCard {
       return `
       <div class="video_preview_container">
            <video autoplay muted loop playsinline class="video_preview_gif">
-          <source src="${this.preview_gif}" type="video/mp4" />
+          <source data-src="${this.preview_gif}" type="video/mp4" />
         </video>
       </div>
       <div class="layout">
@@ -126,7 +126,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
-    preview_gif: '../images/gifs_preview/giphy.gif',
+    preview_gif: '../images/gifs_preview/DooMee_August.mp4',
   },
   {
     id: 'XIrwItlrUaU',
@@ -141,7 +141,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
-    preview_gif: '../images/gifs_preview/giphy.gif',
+    preview_gif: '../images/gifs_preview/Big_Baby_Tape.mp4',
   },
   {
     id: 'm2lt5PmQgUw',
@@ -159,7 +159,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
-    preview_gif: '../images/gifs_preview/giphy.gif',
+    preview_gif: '../images/gifs_preview/FENDIGLOCK.mp4',
   },
   {
     id: 'OpmRuqGNyv0',
@@ -177,7 +177,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
-    preview_gif: '../images/gifs_preview/giphy.gif',
+    preview_gif: '../images/gifs_preview/MAYOT_High.mp4',
   },
   {
     id: 'xTj3X7cc6GA',
@@ -194,7 +194,7 @@ const video_data = [
       ],
     ],
     video_type: 'youtube',
-    preview_gif: '../images/gifs_preview/giphy.gif',
+    preview_gif: '../images/gifs_preview/KASSETA.mp4',
   },
 ];
 
