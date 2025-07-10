@@ -40,10 +40,8 @@ function createImageElement(src, alt) {
   const img = document.createElement('img');
   img.src = src;
   img.alt = alt;
-  // img.loading = 'lazy';
-  // img.style.opacity = '0';
   img.style.transition = 'opacity 0.3s ease';
-  img.setAttribute('loading', 'lazy');
+  img.fetchpriority = 'high'; // for lazy loading
 
   img.onload = function () {
     this.style.opacity = '1';

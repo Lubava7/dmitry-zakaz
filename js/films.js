@@ -9,7 +9,6 @@ function imageExists(url) {
     img.onload = () => resolve(true);
     img.onerror = () => resolve(false);
     img.src = url;
-    img.setAttribute('loading', 'lazy');
   });
 }
 
@@ -67,7 +66,6 @@ function initializeCarousel() {
     img.style.height = '100%';
     img.style.objectFit = 'cover';
     img.style.display = 'block';
-    img.setAttribute('loading', 'lazy');
 
     mainPhotoItem.appendChild(img);
     mainPhotosContainer?.appendChild(mainPhotoItem);
@@ -88,7 +86,6 @@ function initializeCarousel() {
       const thumbImg = new Image();
       thumbImg.src = photo;
       thumbnailsContainer?.appendChild(thumbnail);
-      thumbImg.setAttribute('loading', 'lazy');
     });
   }
 
@@ -248,7 +245,7 @@ class FilmCard {
     this.description = description;
 
     this.el.innerHTML = `
-            <img src="${this.url}" loading="lazy"/>
+            <img src="${this.url}"/>
             <div class="layout">
               <h1>${this.short_name}</h1>
                <h1>&#8212;</h1>
